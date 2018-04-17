@@ -1,0 +1,8 @@
+{
+  "name": "patyrocksApp",
+  "app_id": "f12e43ca",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

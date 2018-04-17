@@ -14,3 +14,184 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.header-md::after,
+.tabs-md[tabsPlacement="top"] > .tabbar::after,
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+  background-image: none;
+  background-repeat: inherit;
+}
+.toolbar-background{
+    background-color:#fff;
+}
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{
+  color:#596176;
+}
+.imgUser{
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-size: cover;
+  overflow: hidden;
+  display: inline-block;
+  margin:10px 5px;
+}
+.imgUser img{
+  width: 100%;
+}
+ion-header{
+  background-image: none;
+  background-repeat: inherit;
+}
+ion-navbar{
+  position:relative;
+}
+
+ion-spinner{
+  display: none;
+}
+
+.button-md{
+  box-shadow: none;
+  color: #596176;
+}
+ion-header .btnVoltar{
+  background-color:transparent;
+  padding-top:0px;
+  margin-top:0px;
+  color: #596176;
+  position:absolute;
+  z-index: 2;
+  font-size:16pt;
+  width: 10px;
+  height:10px;
+  bottom:14px;
+}
+.ios ion-header .btnVoltar{
+  position: absolute;
+  left:10px;
+  font-size:16pt;
+}
+ion-header button ion-icon{
+  color: #596176;
+}
+ion-header ion-title{
+  color:#596176;
+  padding-top:10px;
+  text-align:center;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 6px;
+}
+ion-badge{
+  background-color: #f77062;
+  border-radius: 50px;
+}
+
+.btnEvento.verde{
+  background-color: #20D6BA !important;
+}
+
+.btnEvento{
+  margin-top:10px;
+  margin-bottom:0px;
+  background-color: #f77062 !important; 
+  // background: url('/assets/imgs/fundoBotaoApp.png') repeat-y;
+  background-size: 100%;
+  height:55px;
+  position: fixed;
+  bottom: 0px;
+  z-index: 9999;
+}
+.btnEvento span{
+  line-height:55px;
+  color:#fff;
+}
+.btnRedondo{
+  box-shadow: 1px 4px rgba(223,233,239,0.5);
+  min-height: 50px;
+}
+.btnRedondo.verde{
+  background-color:rgb(35,214,186);
+  color:#fff;
+  box-shadow: 1px 4px rgba(35,214,186,0.5);
+}
+.btnRedondo.vermelho{
+  background-color:rgb(214, 35, 35);
+  color:#fff;
+  box-shadow: 1px 4px rgba(214, 35, 35, 0.5);
+}
+.action-sheet-button-default{
+  border-bottom:1px solid #596176;
+}
+
+.picker-md .picker-prefix, .picker-md .picker-suffix, .picker-md .picker-opt.picker-opt-selected, .picker-md .picker-button{
+  color: #f77062 !important;
+}
+.picker-above-highlight, .picker-below-highlight{
+  display: block;
+}
+ion-content .scroll-content {
+  background-color: rgb(252,253,254);
+  // padding-bottom: 55px;
+  z-index: 9998;
+}
+.espaco-botao{
+  display: block;
+  clear: both;
+  height:55px;
+  width: 100%;
+}
+
+.alert-button-group{
+  border-top:1px solid #f77062 !important;
+}
+.alert-md .alert-button{
+  color:#f77062 !important;
+}
+.back-button.show-back-button{
+  position: absolute;
+  z-index: 2;
+}
+.bar-button{
+  position: absolute;
+  z-index: 2;
+}
+
+ion-menu .item, ion-menu .menu-inner, ion-menu .item-inner, ion-menu ion-header, ion-menu ion-content, ion-menu .scroll-content, ion-menu .toolbar-background, ion-menu .btnEntrar{
+  background-color: rgb(89,97,118);
+  color:#fff;
+  border: 0px!important;
+  line-height:30px;
+  font-size:14pt;
+  margin-bottom:0px;
+}
+ion-menu .btnEntrar{
+  position: absolute;
+  z-index: 2;
+  right: 0px;
+  top: 50px;
+}
+ion-menu ion-header ion-toolbar .toolbar-content{
+  height:96px;
+  position: relative;
+}
+ion-menu ion-content{
+  margin-top:6px;
+}
+ion-menu ion-content .list-md {
+  margin: 30px 0 16px;
+}
+
+ion-menu ion-icon{
+  margin-right: 10px;
+}
+
+ion-menu ion-header ion-title, ion-menu ion-header ion-title .toolbar-title{
+  color: #fff!important;
+  text-align:left!important;
+  display: inline-block;
+}
+
+

@@ -1,0 +1,87 @@
+page-modal-eventday{
+    color:rgb(89,97,118);
+
+    .labels{
+        border:none;
+        color:rgb(89,97,118);
+        font-size:12pt;
+        min-height:30px;
+        padding-left: 30px;
+    }
+    
+    .text-input-md{
+        margin: 4px 0px;
+    }
+    
+    ion-col{
+        position:relative;
+        border-bottom:1px solid rgb(233,240,247);
+    }
+    .icoEmpenho{
+        position: absolute;
+        left: 15px;
+        top: 13px;
+        color: rgb(89,97,118);
+        z-index: 100;
+    }
+    
+    .icoEmpenho.icon-ios{
+        top:20px;
+    }
+    .card{
+        width: 40px;
+        height: 40px;
+        float: left;
+        border-radius: 3px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: none;
+    }
+    .titulo{
+        font-size:18px;
+        color: rgb(89,97,118);
+        line-height: 40px;
+        float: left;
+        margin-left:5px;
+    }
+    
+    .okCheck{
+        position: absolute;
+        right: 10px;
+        top:20px;
+        width: 90px;
+        height: 40px;
+        border-radius: 13px;
+        text-align: center;
+        line-height: 25px;
+        font-size: 16px;
+        margin: 5px 0px 0px;
+        padding: 0px;
+        color: rgb(89,97,118);
+    }
+    .btnCheck{
+        position: absolute;
+        right: 10px;
+        top:20px;
+        width: 90px;
+        height: 40px;
+        border-radius: 13px;
+        text-align: center;
+        line-height: 25px;
+        font-size: 16px;
+        margin: 5px 0px 0px;
+        padding: 0px;
+    }
+    
+    .btnCheck.verde{
+        background-color:rgb(35,214,186);
+        color: rgb(255,255,255);
+        box-shadow: 0px 3px 3px 3px rgba(35,214,186,0.3);
+    }
+    .btnCheck.azul{
+        background-color:rgb(74,144,226);
+        color: rgb(255,255,255);
+        box-shadow: 0px 3px 3px 3px rgba(74,144,226,0.3);
+    }
+}
+

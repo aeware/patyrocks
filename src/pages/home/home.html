@@ -1,18 +1,25 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle float-left>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title float-left>Paty Rocks</ion-title>
+    <button ion-button float-right color="light">
+      <img src="assets/imgs/logo.png" style="height: 44px;"/>
+    </button>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-content>
+  <h3 text-center padding>O que você precisa para o seu evento?</h3>
+  <ion-card class="card" (click)="openBuffets()" style="background-image: url('assets/imgs/btn_buffet.jpg')">
+      <div class="card-title">Serviço de<br/> Buffet</div>
+      <div class="card-btn">selecionar</div>
+  </ion-card>
+  <div style="clear:both;"></div>
+  <ion-card class="card" (click)="openStaffs()"  style="background-image: url('assets/imgs/btn_equipe.jpg')">
+      <div class="card-title">Equipe</div>
+      <div class="card-btn">selecionar</div>
+  </ion-card>
 </ion-content>
+  

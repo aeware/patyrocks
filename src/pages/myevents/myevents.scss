@@ -1,0 +1,77 @@
+page-myevents{
+    h3{
+        color:rgb(89,97,118);
+    }
+
+    ion-card{
+        height: 110px;
+        padding:10px;
+        display: block;
+        position: relative;
+    }
+    
+    ion-card ion-badge{
+        margin: 5px 3px;
+        font-weight: 400;
+        border-radius: 10px!important;    
+    }
+    ion-card ion-badge.confirm{
+        background-color: rgb(35,214,186);
+        color:#fff;
+        box-shadow: 3px 3px rgba(35,214,186,0.3);
+    }
+    ion-card ion-badge.backup{
+        background-color:rgb(74,144,226);
+        color:#fff;
+        box-shadow: 3px 3px rgba(74,144,226,0.3);
+    }
+    ion-card ion-badge.cancel{
+        background-color:rgb(226, 79, 74);
+        color:#fff;
+        box-shadow: 3px 3px rgba(226, 79, 74,0.3);
+    }
+    ion-card ion-badge.verde{
+        background-color: rgb(35,214,186);
+        color:#fff;
+        box-shadow: 3px 3px rgba(35,214,186,0.3);
+    }
+    ion-card ion-badge.azul{
+        background-color:rgb(74,144,226);
+        color:#fff;
+        box-shadow: 3px 3px rgba(74,144,226,0.3);
+    }
+    ion-card ion-badge.vermelho{
+        background-color:rgb(226, 79, 74);
+        color:#fff;
+        box-shadow: 3px 3px rgba(226, 79, 74,0.3);
+    }
+    ion-card ion-badge.amarelo{
+        background-color:rgb(252, 249, 95);
+        color:#000;
+        box-shadow: 3px 3px rgba(132, 145, 15, 0.3);
+    }
+    
+    ion-card .titulo{
+        font-size: 16pt; 
+        color:rgb(89,97,118);
+    }
+    ion-card .titulo .text-input{
+        height:40px;
+        margin:0px 0px 0px 5px;
+        padding:0px;
+        color:rgb(89,97,118);
+    }
+    ion-card .date .datetime-md{
+        height:30px;
+        margin:0px 0px 0px 5px;
+        padding:0px;
+        color:rgb(89,97,118);
+    }
+    
+    ion-card .seta{
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+    }
+}
+

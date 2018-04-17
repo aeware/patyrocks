@@ -1,0 +1,40 @@
+<!--
+  Generated template for the ModalEventdayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    
+        <ion-navbar>
+            <button ion-button (click)="closeModal()" class="btnVoltar" float-left><ion-icon name="arrow-round-back"></ion-icon></button>
+            <ion-title float-left>Detalhes do Evento</ion-title>
+            <!-- <button ion-button float-right>
+              <ion-icon name="notifications"></ion-icon>
+              <ion-badge item-end></ion-badge>
+            </button> -->
+        </ion-navbar>
+    
+    </ion-header>
+
+
+<ion-content>
+    
+    <h4 text-center>Confirmações</h4>
+
+    <ion-list>
+        <ion-item *ngFor="let mystaff of mystaffs">
+            <ion-avatar item-start>
+                <img src="assets/imgs/Barman.jpg">
+            </ion-avatar>
+            <h2>{{mystaff.firstname}} {{mystaff.lastname}}</h2>
+            <h3>{{mystaff.staff_type_name}}</h3>
+            <p>R$ {{mystaff.value_unit}}</p>
+
+            <button class="okCheck" ion-button>OK!</button>
+            <!-- <button class="btnCheck azul" *ngIf="mystaff.payed == 0" ion-button (click)="pago(mystaff)">Pago</button> -->
+            <button class="btnCheck verde" *ngIf="mystaff.arrived == 0" ion-button (click)="chegou(mystaff)">Chegou</button>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

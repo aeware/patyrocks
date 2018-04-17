@@ -1,0 +1,176 @@
+<!--
+  Generated template for the CalculatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>Sua seleção</ion-title>
+      </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="frmCalculate" (ngSubmit)="openCheckout()">
+    <div padding>
+      <ion-grid>
+        <ion-row>
+            <ion-col col-6>
+                <p class="totais">Valor Total</p>
+            </ion-col>
+            <ion-col col-6>
+                <p class="totais" text-right>{{event.valorTotal | currency:"R$ ":0}}</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+              <ion-icon class="icoEmpenho" name="timer"></ion-icon>
+              <ion-select class="labels" cancelText="Cancelar" (ionChange)="atualizaCalculos()" interface="action-sheet" placeholder="Duração" formControlName="duration" [(ngModel)]="event.duration">
+                <ion-option value="4">4 horas</ion-option>
+                <ion-option value="6">6 horas</ion-option>
+                <ion-option value="8">8 horas</ion-option>
+              </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            <ion-card (click)="openBartenders()" style="background-image:url('assets/imgs/Barman.jpg')">
+              <div class="titulo">Bartender</div>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <div class="less_plus">
+              <button class="btnMenos" type="button" ion-button (click)="setQtdLess('bartender')"><ion-icon name="remove"></ion-icon></button>
+              <p class="qtd">{{event.qtdBartender}}</p>
+              <button class="btnMais" type="button" ion-button (click)="setQtdPlus('bartender')"><ion-icon name="add"></ion-icon></button>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            <ion-card (click)="openBbqs()" style="background-image:url('assets/imgs/Churrasqueiro.jpg')">
+              <div class="titulo">Churrasqueiro</div>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+              <div class="less_plus">
+                <button class="btnMenos" type="button" ion-button (click)="setQtdLess('bbq')"><ion-icon name="remove"></ion-icon></button>
+                <p class="qtd">{{event.qtdChurrasqueiro}}</p>
+                <button class="btnMais" type="button" ion-button (click)="setQtdPlus('bbq')"><ion-icon name="add"></ion-icon></button>
+              </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            <ion-card (click)="openGarcons()" style="background-image:url('assets/imgs/Garcom.jpg')">
+              <div class="titulo">Garçom</div>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+              <div class="less_plus">
+                <button class="btnMenos" type="button" ion-button (click)="setQtdLess('garcom')"><ion-icon name="remove"></ion-icon></button>
+                <p class="qtd">{{event.qtdGarcom}}</p>
+                <button class="btnMais" type="button" ion-button (click)="setQtdPlus('garcom')"><ion-icon name="add"></ion-icon></button>
+              </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            <ion-card (click)="openGerais()" style="background-image:url('assets/imgs/AjudanteGeral.jpg')">
+              <div class="titulo">Ajudante Geral</div>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <div class="less_plus">
+              <button class="btnMenos" type="button" ion-button (click)="setQtdLess('ajudante')"><ion-icon name="remove"></ion-icon></button>
+              <p class="qtd">{{event.qtdAjudante}}</p>
+              <button class="btnMais" type="button" ion-button (click)="setQtdPlus('ajudante')"><ion-icon name="add"></ion-icon></button>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            <ion-card (click)="openRecepcionistas()" style="background-image:url('assets/imgs/Recepcionista.jpg')">
+              <div class="titulo">Recepcionista</div>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+              <div class="less_plus">
+              <button class="btnMenos" type="button" ion-button (click)="setQtdLess('recepcao')"><ion-icon name="remove"></ion-icon></button>
+              <p class="qtd">{{event.qtdRecepcionista}}</p>
+              <button class="btnMais" type="button" ion-button (click)="setQtdPlus('recepcao')"><ion-icon name="add"></ion-icon></button>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+              <p text-center>Por favor ajuste as<br/> quantidades acima de<br/> acordo com suas necessidades</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-7 class="colunaResumo">
+              <p>Total de Bartenders</p>
+          </ion-col>
+          <ion-col col-5 class="colunaResumo">
+              <p text-center>{{event.valTotalBartender | currency:"R$ ":0}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-7 class="colunaResumo">
+              <p>Total de Churrasqueiros</p>
+          </ion-col>
+          <ion-col col-5 class="colunaResumo">
+              <p text-center>{{event.valTotalChurrasqueiro | currency:"R$ ":0}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-7 class="colunaResumo">
+              <p>Total de Garçom</p>
+          </ion-col>
+          <ion-col col-5 class="colunaResumo">
+              <p text-center>{{event.valTotalGarcom | currency:"R$ ":0}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-7 class="colunaResumo">
+              <p>Total de Ajudante Geral</p>
+          </ion-col>
+          <ion-col col-5 class="colunaResumo">
+              <p text-center>{{event.valTotalAjudante | currency:"R$ ":0}}</p>
+          </ion-col>
+        </ion-row>      
+        <ion-row>
+          <ion-col col-7 class="colunaResumo">
+              <p>Total de Recepcionista</p>
+          </ion-col>
+          <ion-col col-5 class="colunaResumo">
+              <p text-center>{{event.valTotalRecepcionista | currency:"R$ ":0}}</p>
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row>
+          <ion-col col-12 text-center>
+              <p class="asterisco">* Cada equipe precisa ser paga individualmente no evento</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="colunaResumoTotal" col-7>
+                <p class="totais">Valor da Reserva</p>
+            </ion-col>
+            <ion-col class="colunaResumoTotal" col-5>
+                <p class="totais" text-right>{{ (event.valorTotal * 0.2)  | currency:"R$ ":0}}</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="colunaResumo" col-12 text-center>
+              <p class="asterisco">* Pagamento imediato (20% de taxa)</p>
+          </ion-col>
+        </ion-row> -->
+      </ion-grid>
+    </div>
+  </form>
+  <div class="espaco-botao"></div>
+</ion-content>
+
+<button class="btnEvento" (click)="openCheckout()" type="submit" ion-button full float-end>Contratar</button>

@@ -1,0 +1,79 @@
+<!--
+  Generated template for the ModalDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Detalhes do Evento</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="frmDetalhes" (ngSubmit)="finalizar()">
+    <div padding>
+      <ion-grid>
+        <ion-row>
+            <ion-col col-12>
+                <h4 text-center>Falta pouco!<br/>Conte-nos agora quando e onde será:</h4>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-icon class="icoEmpenho" name="calendar"></ion-icon>
+            <ion-datetime doneText="Ok" cancelText="Cancelar" class="labels" placeholder="Data do Evento" min="2018-01-01" max="2020-01-01" displayFormat="DD MMM YYYY" formControlName="dateStart" [(ngModel)]="event.dateStart"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-icon class="icoEmpenho" name="time"></ion-icon>
+            <ion-datetime doneText="Ok" cancelText="Cancelar" class="labels" placeholder="Hora de Início" min="00:00" max="24:00" minuteValues="0,30" displayFormat="HH:mm" pickerFormat="HH mm" formControlName="timeStarts" [(ngModel)]="event.timeStarts"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-icon class="icoEmpenho" name="person"></ion-icon>
+            <ion-input type="number" class="labels" placeholder="Número de Participantes" formControlName="attendees" [(ngModel)]="event.attendees" ></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-icon class="icoEmpenho" name="wine"></ion-icon>
+            <ion-select okText="Ok" cancelText="Cancelar" class="labels" interface="action-sheet" placeholder="Tipo de Evento" formControlName="type" [(ngModel)]="event.type">
+              <ion-option *ngFor="let service of serviceTypes" [value]="service.id">{{service.name}}</ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="clickLocation" col-12>
+            <ion-icon class="icoEmpenho" name="pin"></ion-icon>
+            <ion-input type="text" class="labels" (ionFocus)="openLocation()" placeholder="Localização" formControlName="location" [(ngModel)]="event.location" ></ion-input>
+            
+            <ion-input type="hidden" formControlName="number" [(ngModel)]="event.number" ></ion-input>
+            <ion-input type="hidden" formControlName="complement" [(ngModel)]="event.complement" ></ion-input>
+            <ion-input type="hidden" formControlName="street" [(ngModel)]="event.street" ></ion-input>
+            <ion-input type="hidden" formControlName="neighborhood" [(ngModel)]="event.neighborhood" ></ion-input>
+            <ion-input type="hidden" formControlName="city" [(ngModel)]="event.city" ></ion-input>
+            <ion-input type="hidden" formControlName="state" [(ngModel)]="event.state" ></ion-input>
+            <ion-input type="hidden" formControlName="country" [(ngModel)]="event.country" ></ion-input>
+            <ion-input type="hidden" formControlName="lat" [(ngModel)]="event.lat" ></ion-input>
+            <ion-input type="hidden" formControlName="lng" [(ngModel)]="event.lng" ></ion-input>
+            <ion-input type="hidden" formControlName="zipcode" [(ngModel)]="event.zipcode" ></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+              <ion-icon class="icoEmpenho" name="pin"></ion-icon>
+              <ion-input type="text" class="labels" placeholder="Complemento" formControlName="complement" [(ngModel)]="event.complement" ></ion-input>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </div>
+  </form>
+</ion-content>
+<button class="btnEvento" (click)="finalizar()" type="submit" ion-button full float-end>Checkout</button>

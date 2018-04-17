@@ -1,0 +1,37 @@
+<!--
+  Generated template for the OthersDataPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <ion-title float-left>Paty Rocks</ion-title>
+      <!-- <button ion-button float-right>
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge item-end></ion-badge>
+      </button> -->
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <form [formGroup]="frmRegEdit">
+      <div padding>
+        <h3 full text-center>Entre em Contato</h3>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12>
+              <ion-icon class="icoSignUp" name="person"></ion-icon>
+              <ion-input class="inputs" type="tel" placeholder="Telefone" formControlName="phonenumber" [(ngModel)]="register.phonenumber"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+                <div class="iagree"><ion-checkbox formControlName="iagree" [(ngModel)]="register.iagree"></ion-checkbox>Eu aceito os <button ion-button (click)="openTerms()" class="csLink" clear>Termos e condições do serviço</button> e a politica de privacidade.</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </form>
+  </ion-content>
+  <button class="btnEvento" (click)="singEdit()" ion-button full float-end>Enviar</button>

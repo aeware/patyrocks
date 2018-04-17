@@ -1,0 +1,83 @@
+<!--
+  Generated template for the ModalEventdetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button (click)="closeModal()" class="btnVoltar" float-left><ion-icon name="arrow-round-back"></ion-icon></button>
+        <ion-title float-left>Detalhes do Evento</ion-title>
+        <!-- <button ion-button float-right>
+          <ion-icon name="notifications"></ion-icon>
+          <ion-badge item-end></ion-badge>
+        </button> -->
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-grid>
+        <ion-row *ngIf="!ioControls.isReconfirmed"> 
+            <ion-col col-12 class="colunaResumo" text-center> 
+                <p>Você esta sendo convidado como <br/><span>{{myevent.staff_type_name}}</span></p>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="ioControls.isConfirmed">
+            <ion-col col-12 text-center class="colunaResumo" >
+                <button ion-button (click)="cancel(myevent)" round class="btnRedondo vermelho">Cancelar</button>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="!ioControls.isConfirmed && !ioControls.isReconfirmed">
+            <ion-col col-6 text-center class="colunaResumo" >
+                <button ion-button (click)="negar(myevent)" round class="btnRedondo">Rejeitar</button>
+            </ion-col>
+            <ion-col col-6 text-center class="colunaResumo" >
+                <button ion-button (click)="confirmar(myevent)" round class="btnRedondo verde">Aceitar</button>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="ioControls.isReconfirmed"> 
+            <ion-col col-12 class="colunaResumo" text-center> 
+                <p>Você confirma que poderá realmente aparecer no evento?</p>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="ioControls.isReconfirmed">
+            <ion-col col-6 text-center class="colunaResumo" >
+                <button ion-button (click)="renegar(myevent)" round class="btnRedondo">Não poderei</button>
+            </ion-col>
+            <ion-col col-6 text-center class="colunaResumo" >
+                <button ion-button (click)="reconfirmar(myevent)" round class="btnRedondo verde">Confirmar</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <ion-label stacked>Tipo do Evento</ion-label>
+                <ion-input class="labels" readonly="true" [(ngModel)]="myevent.typename"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <ion-label stacked>Localização</ion-label>
+                <ion-textarea class="labels" readonly="true" [(ngModel)]="myevent.location"></ion-textarea>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <ion-label stacked>Data</ion-label>
+                <ion-datetime disabled="true" displayFormat="DDD, DD MMM YYYY" class="labels" readonly="true" [(ngModel)]="myevent.dateStart"></ion-datetime>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-6>
+                <ion-label stacked>Início</ion-label>
+                <ion-datetime disabled="true" displayFormat="HH:mm" class="labels" readonly="true" [(ngModel)]="myevent.dateStart"></ion-datetime>
+            </ion-col>
+            <ion-col col-6>
+                <ion-label stacked>Duração</ion-label>
+                <p>{{myevent.duration}} horas</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+  

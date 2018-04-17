@@ -1,3 +1,54 @@
 page-home {
+    .card{
+        width: 100%;
+        height: 200px;
+        margin: 20px auto;
+    }
+    
+    .card .card-title{
+        text-align: center;
+        color:#fff;
+        font-size:26pt;
+        padding-top:50px;
+    }
+    
+    .contentModal {
+        color: rgb(89,97,118);
+    }
+    
+    .contentModal h3{
+        font-size:12pt;
+        font-weight: bold;
+        text-transform:uppercase;
+    }
+    
+    .contentModal ul{
+        padding-left: 20px;
+    }
+    
+    .contentModal li{
+        font-size:12pt;
+    }
+    
+    .contentModal hr{
+        color: rgb(89,97,118);
+        height:1pt;
+    }
+    
+    .contentModal .modelImg{
+        
+    }
 
+    .card-btn{
+        width: 100px;
+        margin: 0 auto;
+        background-color: #23d6b9;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 15px;
+        margin-top: 10px;
+        color: #fff;
+    }
+    
 }

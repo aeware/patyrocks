@@ -1,0 +1,28 @@
+page-empenho{
+    .inputs{
+        border:1px solid rgb(233,240,247);
+        border-radius:5px;
+        background-color:#fff;
+        color:rgb(89,97,118);
+        font-size:12pt;
+        height:45px;
+        padding-left: 30px;
+    }
+    ion-select{
+        max-width: 100% !important;
+    }
+    ion-col{
+        position:relative;
+    }
+    .icoEmpenho{
+        position: absolute;
+        left: 15px;
+        top: 21px;
+        color: rgb(89,97,118);
+        z-index: 100;
+    }
+    .toast-message {
+        white-space: pre;
+      } 
+      
+}

@@ -1,0 +1,38 @@
+<!--
+  Generated template for the MyeventsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle float-left>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title float-left>Paty Rocks</ion-title>
+      <!-- <button ion-button float-right>
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge item-end></ion-badge>
+      </button> -->
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <p class="txtTitulo">    
+      <ion-avatar style="background-image:url('assets/imgs/Barman.jpg')" item-start margin-left>
+      </ion-avatar>
+      {{dia}} {{userDetails.name}}, esta é sua lista de eventos.
+    </p>
+
+    <h4 padding-left>Meus Eventos Confirmados</h4>
+
+    <ion-card *ngFor="let myevent of myevents" (click)="openEvent(myevent)" margin-top>
+      <div class="tags">
+          <ion-badge *ngFor="let flag of myevent.flags" class="{{flag.tag}}">{{flag.name}}</ion-badge>
+      </div>
+      <div class="titulo">{{myevent.typename}} - {{myevent.staff_type_name}}</div>
+      <div class="date"><ion-datetime class="labels" disabled="true"  displayFormat="DDD, DD MMM YYYY" [(ngModel)]="myevent.dateStart"></ion-datetime></div>
+      <ion-icon class="seta" name="arrow-forward"></ion-icon>
+    </ion-card>
+    
+  </ion-content>

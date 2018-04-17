@@ -1,0 +1,86 @@
+page-staffevents{
+    color:rgb(89,97,118);
+
+    ion-card{
+        height: 110px;
+        padding:10px;
+        display: block;
+        position: relative;
+    }
+    
+    ion-card ion-badge{
+        margin: 5px 3px;
+        font-weight: 400;
+        border-radius: 10px!important;    
+    }
+    ion-card ion-badge.confirm{
+        background-color: rgb(35,214,186);
+        color:#fff;
+        box-shadow: 3px 3px rgba(35,214,186,0.3);
+    }
+    ion-card ion-badge.acept{
+        background-color:rgb(252,95,128);
+        color:#fff;
+        box-shadow: 3px 3px rgba(252,95,128,0.3);
+    }
+    ion-card ion-badge.waiting{
+        background-color:rgb(252, 249, 95);
+        color:#000;
+        box-shadow: 3px 3px rgba(132, 145, 15, 0.3);
+    }
+    ion-card ion-badge.verde{
+        background-color: rgb(35,214,186);
+        color:#fff;
+        box-shadow: 3px 3px rgba(35,214,186,0.3);
+    }
+    ion-card ion-badge.azul{
+        background-color:rgb(74,144,226);
+        color:#fff;
+        box-shadow: 3px 3px rgba(74,144,226,0.3);
+    }
+    ion-card ion-badge.vermelho{
+        background-color:rgb(226, 79, 74);
+        color:#fff;
+        box-shadow: 3px 3px rgba(226, 79, 74,0.3);
+    }
+    ion-card ion-badge.amarelo{
+        background-color:rgb(252, 249, 95);
+        color:#000;
+        box-shadow: 3px 3px rgba(132, 145, 15, 0.3);
+    }
+
+    ion-card .titulo{
+        font-size: 16pt;
+        line-height: 20pt;
+        padding: 10px 5px 0px;
+    }
+    
+    ion-card .date{
+        padding: 3px 0px 0px 6px;
+        margin:0;
+        font-size: 12pt;
+        line-height: 16pt;
+    }
+
+    ion-card ion-datetime.labels{
+        padding:0;
+        margin: 0;
+    }
+    
+    ion-card .seta{
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+    }
+    
+    ion-avatar{
+        width: 40px;
+        height: 40px;
+        float: left;
+        border-radius: 20px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: none;
+        margin-right: 10px;
+    }
+}

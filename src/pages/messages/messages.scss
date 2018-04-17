@@ -1,0 +1,36 @@
+page-messages {
+    color:rgb(89,97,118);
+}
+
+page-messages ion-item{
+    position: relative;
+    height:90px;
+}
+
+page-messages ion-item ion-avatar{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+page-messages ion-item ion-label{
+    position: absolute;
+    left: 60px;
+    top: 10px;
+    width: calc(100% - 60px);
+}
+
+page-messages ion-item ion-icon{
+    position: absolute;
+    right: 25px;
+    top: 35px;
+}
+page-messages ion-item ion-badge{
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    background-color:#f77062 !important;
+    color:#fff !important;
+    border-radius: 40px!important;
+    box-shadow: 1px 3px rgba(247, 112,98,0.3);
+}

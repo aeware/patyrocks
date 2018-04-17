@@ -1,0 +1,62 @@
+page-others-data {
+
+    .inputs{
+        border:1px solid rgb(233,240,247);
+        border-radius:5px;
+        background-color:#fff;
+        color:rgb(89,97,118);
+        font-size:12pt;
+        height:45px;
+        padding-left: 30px;
+    }
+    
+    ion-select{
+        max-width: 100% !important;
+    }
+    
+    ion-col{
+        position:relative;
+    }
+    .icoSignUp{
+        position: absolute;
+        left: 15px;
+        top: 21px;
+        color: rgb(89,97,118);
+        z-index: 100;
+    }
+    
+    .iagree{
+        margin-top: 12px;
+        font-size: 11pt;
+        line-height: 14pt;
+    }
+    
+    .iagree ion-checkbox{
+        margin-right:10px;
+    }
+    
+    .csLink{
+        color: #33d5ba;
+        font-weight: bold;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-size: 9pt;
+        line-height: 14pt;
+        height: 22px;
+        vertical-align: middle;
+    }
+    
+    .csLogin{
+        line-height: 60pt;
+        background-color: #fff;
+        font-size: 14pt;
+        text-align: center;
+    }
+    .csLogin .csLink{
+        line-height: 60pt;
+        font-size: 12pt;
+        height: 60pt;
+        margin-left: 10px;
+    }
+}

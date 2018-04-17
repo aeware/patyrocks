@@ -1,0 +1,88 @@
+page-modal-eventdetails{
+    ion-content .scroll-content{
+        margin-bottom:0px!important;
+    }
+    .labels{
+        border:none;
+        color:rgb(89,97,118);
+        font-size:12pt;
+        min-height:30px;
+    }
+    .text-input-md{
+        margin: 4px 0px;
+    }
+    ion-col{
+        position:relative;
+        border-bottom:1px solid rgb(233,240,247);
+    }
+    .datetime-disabled, .item-datetime-disabled ion-label{
+        color:#596176!important;
+        opacity:1!important;
+    }
+    .icoEmpenho{
+        position: absolute;
+        left: 15px;
+        top: 13px;
+        color: rgb(89,97,118);
+        z-index: 100;
+    }
+    .icoEmpenho.icon-ios{
+        top:20px;
+    }
+    .card{
+        width: 40px;
+        height: 40px;
+        float: left;
+        border-radius: 3px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: none;
+    }
+    .titulo{
+        font-size:18px;
+        color: rgb(89,97,118);
+        line-height: 40px;
+        float: left;
+        margin-left:5px;
+    }
+    .colunaResumo{
+        border:0px!important;
+        height: 100px;
+    }
+    .colunaResumo p{
+        font-size:14pt;
+    }
+    .colunaResumoTotal{
+        border:0px!important;
+        height: 40px;
+    }
+    .asterisco{
+        font-size:8pt;
+    }
+    .totais{
+        font-size:16pt;
+    }
+    .qtdED{
+        float:right;
+        margin-left: 4px;
+        border:none;
+        color:rgb(89,97,118);
+        font-size:12pt;
+        line-height:14pt;
+        width: 30px;
+        vertical-align: top;
+    }
+    .csLink{
+        background-color: #fff;
+        color: #33d5ba;
+        font-weight: bold;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-size: 9pt;
+        line-height: 14pt;
+        height: 40px;
+        vertical-align: middle;
+    }
+
+}

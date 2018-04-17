@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "23899568048",
+    "firebase_url": "https://patyrocks-5008b.firebaseio.com",
+    "project_id": "patyrocks-5008b",
+    "storage_bucket": "patyrocks-5008b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23899568048:android:1c8d46e37683ded0",
+        "android_client_info": {
+          "package_name": "rocks.paty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23899568048-8vle5r5e8fpe2g5fut3i3qmeu7rf74dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvwh82g4Bkvw3oe3l5CH9aOVxq_ZUsxI0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23899568048:android:c845bd495c4b2bd8",
+        "android_client_info": {
+          "package_name": "com.patyrocks.patyrocksapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23899568048-8vle5r5e8fpe2g5fut3i3qmeu7rf74dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvwh82g4Bkvw3oe3l5CH9aOVxq_ZUsxI0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

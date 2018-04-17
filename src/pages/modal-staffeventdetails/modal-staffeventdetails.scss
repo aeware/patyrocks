@@ -1,0 +1,96 @@
+page-modal-staffeventdetails{
+    color:rgb(89,97,118)!important;
+
+    .labels{
+        border:none;
+        color:rgb(89,97,118)!important;
+        font-size:12pt;
+        min-height:30px;
+        padding:10px 0 0 0;
+        margin:0;
+        opacity: 1!important;
+    }
+    
+    .text-input-md{
+        margin: 4px 0px;
+    }
+    
+    ion-col p{
+        color:rgb(89,97,118)!important;
+    }
+    ion-col{
+        position:relative;
+        border-bottom:1px solid rgb(233,240,247);
+    }
+    .icoEmpenho{
+        position: absolute;
+        left: 15px;
+        top: 13px;
+        color: rgb(89,97,118);
+        z-index: 100;
+    }
+    
+    .icoEmpenho.icon-ios{
+        top:20px;
+    }
+    .card{
+        border-radius: 3px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: none;
+    }
+    .titulo{
+        font-size:18px;
+        color: rgb(89,97,118);
+        line-height: 40px;
+        float: left;
+        margin-left:5px;
+    }
+    
+    .colunaResumo{
+        border:0px!important;
+        height: 60px;
+    }
+    .colunaResumo p{
+        font-size:12pt;
+    }
+    .colunaResumo p span{
+        color: rgb(252,95,128);
+    }
+    
+    .colunaResumoTotal{
+        border:0px!important;
+        height: 40px;
+    }
+    .asterisco{
+        font-size:8pt;
+    }
+    .totais{
+        font-size:16pt;
+    }
+    
+    .qtdED{
+        width: 40px;
+        margin-left: 2px;
+        padding: 0;
+        float: right;
+        height: 30px;
+        line-height: 30px;
+        font-size: 16pt;
+    }
+     
+    
+    .csLink{
+        color: #33d5ba;
+        font-weight: bold;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-size: 9pt;
+        line-height: 14pt;
+        height: 40px;
+        vertical-align: middle;
+    }
+    
+} 
+

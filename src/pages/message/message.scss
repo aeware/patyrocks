@@ -1,0 +1,24 @@
+page-message {
+    color:rgb(89,97,118);
+}
+
+page-message ion-card{
+    border-radius:0px!important;
+    box-shadow: none!important;
+    margin-bottom:20px!important;
+}
+
+page-message ion-card ion-avatar{
+    width: 40px;
+    height: 40px;
+    float: left;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: none;
+    margin-right:20px;
+}
+
+page-message h2{
+    line-height: 40px;
+}

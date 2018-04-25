@@ -4,14 +4,14 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title float-left>Paty Rocks</ion-title>
-    <button ion-button float-right color="light">
+    <button ion-button float-right color="light" (click)="faleCom()">
       <img src="assets/imgs/logo.png" style="height: 44px;"/>
     </button>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <h3 text-center padding>O que você precisa para o seu evento?</h3>
+  <h5 text-center padding>O que você precisa para o seu evento?</h5>
   <ion-card class="card" (click)="openBuffets()" style="background-image: url('assets/imgs/btn_buffet.jpg')">
       <div class="card-title">Serviço de<br/> Buffet</div>
       <div class="card-btn">selecionar</div>

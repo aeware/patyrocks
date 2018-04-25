@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { IonicPage, NavController, NavParams, LoadingController, Loading, Modal, ModalController, ModalOptions } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading, Modal, ModalController, ModalOptions, Events } from 'ionic-angular';
 
-// import { Account } from "../../models/account/account.interface";
 import { Event } from "../../models/event/event.interface";
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
-import { ToastController } from 'ionic-angular/components/toast/toast-controller';
-// import { SignupPage } from '../signup/signup';
-// import { PaymentPage } from '../payment/payment';
 /**
  * Generated class for the CalculatePage page.
  *
@@ -27,12 +23,10 @@ export class CalculatePage {
   loading: Loading;
   public account : any;
   public frmCalculate : FormGroup;
-  public userDetails: any;  
   responseData : any;
-  eventDetails : any;
   event = {} as Event;
   
-  constructor(private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, public toast: ToastController) {
+  constructor(public events: Events, private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController) {
     this.frmCalculate = this.formBuilder.group({
       duration: ['', Validators.required]
     });
@@ -152,7 +146,7 @@ export class CalculatePage {
   setQtdPlus(service){
 
     if(!this.event.duration){
-      this.presentToast("Selecione a duração do evento");
+      this.events.publish('alerts:toast','Selecione a duração do evento');
     }else{
       switch (service) {
         case 'bartender':
@@ -181,15 +175,9 @@ export class CalculatePage {
   openCheckout(){
     if(this.validaTela()){
       this.editarLocal();
-
-      // if(this.event.street == ''){
-      //   this.editarLocal();
-      // }else{
-      //   this.checkout();
-      // }
       
     }else{
-      this.presentToast("Selecione ao menos 1 Staff.");
+      this.events.publish('alerts:toast','Selecione ao menos 1 Staff.');
     }
     
   }
@@ -226,7 +214,6 @@ export class CalculatePage {
     
     if(localStorage.getItem("account")){
       this.account = JSON.parse(localStorage.getItem('account'));
-      console.log('uid:'+this.account.uid);
       this.event.uuid = this.account.uuid;
     }
 
@@ -249,7 +236,7 @@ export class CalculatePage {
 
     }, (err) => {
       this.loading.dismiss();
-      this.presentToast("Houve um erro na solicitação. Tente novamente.");
+      this.events.publish('alerts:toast','Houve um erro na solicitação. Tente novamente.');
     });
 
 
@@ -310,15 +297,5 @@ export class CalculatePage {
     const myModal: Modal = this.modal.create('ModalRecepcionistasPage', { /*data: myModalData*/ }, myModalOptions);
 
     myModal.present();
-  }
-
-  presentToast(msg:string, timer:number = 3000) {
-    let toast = this.toast.create({
-      message: msg,
-      duration: timer,
-      position: 'top'
-    });
-  
-    toast.present();
   }
 }

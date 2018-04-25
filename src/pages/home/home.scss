@@ -1,8 +1,22 @@
 page-home {
+    h5{
+        margin:0px;
+        padding:0px;
+    }
     .card{
-        width: 100%;
+        width: 98%;
         height: 200px;
-        margin: 20px auto;
+        margin: 15px auto;
+        border-radius: 5px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        -webkit-box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
+    }
+
+    .alert-title,.alert-md .alert-sub-title{
+        text-align: center;
     }
     
     .card .card-title{

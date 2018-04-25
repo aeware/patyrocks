@@ -14,9 +14,13 @@ export interface Event {
     country : string,
     lat : string,
     lng : string,
-    attendees : string,
+    attendees : number,
     type : string,
     number : string,
+
+    valorTotal : number,
+
+    //staff
     qtdBartender : number,
     qtdGarcom : number,
     qtdAjudante : number,
@@ -32,5 +36,23 @@ export interface Event {
     valAjudante : number,
     valRecepcionista : number,
     valChurrasqueiro : number,
-    valorTotal : number
+    //services
+    qtdBurguer : number,
+    qtdPizza : number,
+    qtdCrepe : number,
+    qtdAgua : number,
+    qtdCerveja : number,
+    qtdGin : number,
+    valTotalBurguer : number,
+    valTotalPizza : number,
+    valTotalCrepe : number,
+    valTotalAgua : number,
+    valTotalCerveja : number,
+    valTotalGin : number,
+    valBurguer : number,
+    valPizza : number,
+    valCrepe : number,
+    valAgua : number,
+    valCerveja : number,
+    valGin : number
   }

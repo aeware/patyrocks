@@ -1,0 +1,230 @@
+<!--
+  Generated template for the CalculatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle float-left>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title float-left>Selecione o serviço</ion-title>
+      <button ion-button float-right color="light">
+        <img src="assets/imgs/logo.png" style="height: 44px;"/>
+      </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="frmCalculateServices" (ngSubmit)="openCheckout()">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-card full style="background-image:url('assets/imgs/btn_burguer.jpg')">
+            <div class="titulo" (click)="openBurguer()">Burguer <ion-icon name="information-circle-outline"></ion-icon></div>
+            <div class="less_plus">
+                <ion-checkbox formControlName="qtdBurguer" [(ngModel)]="event.qtdBurguer"></ion-checkbox>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-card full style="background-image:url('assets/imgs/btn_pizza.jpg')">
+            <div class="titulo" (click)="openPizza()">Pizza <ion-icon name="information-circle-outline"></ion-icon></div>
+            <div class="less_plus">
+                <ion-checkbox formControlName="qtdPizza" [(ngModel)]="event.qtdPizza"></ion-checkbox>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-card full style="background-image:url('assets/imgs/btn_crepe.jpg')">
+            <div class="titulo" (click)="openCrepe()">Crepe <ion-icon name="information-circle-outline"></ion-icon></div>
+            <div class="less_plus">
+                <ion-checkbox formControlName="qtdCrepe" [(ngModel)]="event.qtdCrepe"></ion-checkbox>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-card full style="background-image:url('assets/imgs/btn_aer.jpg')">
+            <div class="titulo" (click)="openAeR()">Água/Refrigerante <ion-icon name="information-circle-outline"></ion-icon></div>
+            <div class="less_plus">
+                <ion-checkbox formControlName="qtdAgua" [(ngModel)]="event.qtdAgua"></ion-checkbox>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-card full style="background-image:url('assets/imgs/btn_cerveja.jpg')">
+            <div class="titulo" (click)="openCerveja()">Cerveja <ion-icon name="information-circle-outline"></ion-icon></div>
+            <div class="less_plus">
+                <ion-checkbox formControlName="qtdCerveja" [(ngModel)]="event.qtdCerveja"></ion-checkbox>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-card full style="background-image:url('assets/imgs/btn_gin.jpg')">
+            <div class="titulo" (click)="openGin()">Gin Tônica <ion-icon name="information-circle-outline"></ion-icon></div>
+            <div class="less_plus">
+                <ion-checkbox formControlName="qtdGin" [(ngModel)]="event.qtdGin"></ion-checkbox>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row-scroll">
+        <ion-col col-12 class="col-scroll">
+          <h5 text-center>Número de Pessoas</h5>
+          <ion-scroll (scroll)="scrollPosition()" id="scrollPos" scrollX style="height:100px;">
+            <div class="scroll-item-space">
+            </div>
+            <div class="scroll-item" onclick="scroll_to(0)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 0==event.attendees}" (click)="teste(0)">
+                  <p>0</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(1)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 10==event.attendees}" (click)="teste(10)">
+                  <p>10</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(2)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 20==event.attendees}" (click)="teste(20)">
+                  <p>20</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(3)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 30==event.attendees}" (click)="teste(30)">
+                  <p>30</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(4)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 40==event.attendees}" (click)="teste(40)">
+                  <p>40</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(5)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 50==event.attendees}" (click)="teste(50)">
+                  <p>50</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(6)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 60==event.attendees}" (click)="teste(60)">
+                  <p>60</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(7)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 70==event.attendees}" (click)="teste(70)">
+                  <p>70</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(8)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 80==event.attendees}" (click)="teste(80)">
+                  <p>80</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(9)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 90==event.attendees}" (click)="teste(90)">
+                  <p>90</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(10)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 100==event.attendees}" (click)="teste(100)">
+                  <p>100</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(11)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 110==event.attendees}" (click)="teste(110)">
+                  <p>110</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(12)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 120==event.attendees}" (click)="teste(120)">
+                  <p>120</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(13)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 130==event.attendees}" (click)="teste(130)">
+                  <p>130</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(14)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 140==event.attendees}" (click)="teste(140)">
+                  <p>140</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item" onclick="scroll_to(15)">
+              <ion-col col-33>
+                <div class="item-number" [ngClass]="{'item-selected': 150==event.attendees}" (click)="teste(150)">
+                  <p>150</p>
+                </div>
+              </ion-col>
+            </div>
+            <div class="scroll-item-space">
+            </div>
+          </ion-scroll>
+            <!-- <ion-icon class="icoEmpenho" name="timer"></ion-icon>
+            <ion-select class="labels" cancelText="Cancelar" (ionChange)="atualizaCalculos()" interface="action-sheet" placeholder="Número de pessoas" formControlName="attendees" [(ngModel)]="event.attendees">
+              <ion-option value="10">10</ion-option>
+              <ion-option value="20">20</ion-option>
+              <ion-option value="30">30</ion-option>
+            </ion-select> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <div class="espaco-botao"></div>
+</ion-content>
+<div id="footer" full float-end>
+  <div class="valTotal">
+    <ion-grid>
+      <ion-row>
+          <ion-col col-6 class="borderToFooter">
+            <div class="btnTotalNew">
+                <ion-icon class="icoCart" name="cart"></ion-icon><p class="totais">Valor Total:<br/> {{event.valorTotal | currency:"R$ ":0}}</p>
+            </div>
+          </ion-col>
+          <ion-col col-6 class="borderToFooter">
+              <button class="btnEventoNew" (click)="openCheckout()" type="submit" ion-button>Solicitar<br/>Orçamento</button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div> 
+</div>

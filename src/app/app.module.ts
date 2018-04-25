@@ -18,6 +18,7 @@ import { HttpModule } from '@angular/http';
 import { Facebook } from '@ionic-native/facebook';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { SocialService } from '../providers/social-services/social-services';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     Base64,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
+    SocialService,
     AuthServicesProvider,
     AngularFireAuth
   ],

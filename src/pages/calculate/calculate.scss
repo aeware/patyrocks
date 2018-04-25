@@ -1,4 +1,7 @@
 page-calculate{
+    .grid, .col{
+        padding:0!important;
+    }
     .labels{
         border:none;
         color:rgb(89,97,118);
@@ -16,7 +19,7 @@ page-calculate{
      
     .text-input-md{
         margin: 4px 0px;
-    }
+    } 
     .text-input-ios{
         margin: 0px!important;
         padding:10px 0px 0px 0px!important;
@@ -28,46 +31,46 @@ page-calculate{
     }
     .icoEmpenho{
         position: absolute;
-        left: 15px;
-        top: 13px;
-        color: rgb(89,97,118);
-        z-index: 100;
+        color: #596176;
+        line-height: 40px;
     }
     
-    .icoEmpenho.icon-ios{
-        top:20px;
-    }
+    // .icoEmpenho.icon-ios{
+    //     top:20px;
+    // }
     .card{
-        width: 40px;
-        height: 40px;
+        width: 100%;
+        height: 70px;
         float: left;
-        border-radius: 3px;
+        border-radius: 0px;
         background-size: cover;
         background-position: center;
+        -webkit-box-shadow: none;
         box-shadow: none;
-    }
-    ion-card{
-        border-radius:40px!important;
-        width: 90%!important;
-        height:70px!important;
-        position:relative;
+        margin: 0;
+        position: relative;
     }
     .titulo{
+        position: absolute;
+        left: 0;
+        z-index: 1000;
         width: 100%;
         height: 70px;
         line-height: 70px;
-        text-align:left;
-        font-size:18px;
-        font-weight: bold;
+        text-align: left;
+        font-size: 18px;
+        // font-weight: bold;
         color: #fff;
-        padding-left:10px;
-        // padding: 38px 5px 0px;
+        padding-left: 10px;
         vertical-align: bottom;
-        background-color: rgba(000,000,000,0.3)
+        background-color: rgba(0, 0, 0, 0.3);
     }
     .less_plus{
+        position:absolute;
+        right:10px;
         height:70px;
         padding-top:25px;
+        z-index: 2000;
     }
     
     .btnMenos, .btnMais{
@@ -96,7 +99,7 @@ page-calculate{
     .qtd{
         text-align: center;
         font-size: 12pt;
-        color: #596176;
+        color: #FFF;
         line-height: 25px;
         float: left;
         margin: 0;
@@ -117,9 +120,6 @@ page-calculate{
     }
     .asterisco{
         font-size:8pt;
-    }
-    .totais{
-        font-size:16pt;
     }
 } 
 

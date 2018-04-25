@@ -1,143 +1,112 @@
-// import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-// import { Http, Headers, RequestOptions, Response } from '@angular/http';
-// import { Observable } from 'rxjs/Observable';
-// import 'rxjs/add/observable/throw';
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/do';
-// import 'rxjs/add/operator/catch';
+import { Http } from '@angular/http';
 
-// import { Events, Platform } from 'ionic-angular';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
 
-// import {Facebook, FacebookLoginResponse} from '@ionic-native/facebook';
+import { Events, Platform } from 'ionic-angular';
 
-// declare var cordova:any;
-// declare var window:any;
+import {Facebook} from '@ionic-native/facebook';
 
-// @Injectable()
-// export class SocialService {
+declare var window:any;
 
-// 	mode:string = 'dev';
+@Injectable()
+export class SocialService {
 
-// 	ready:boolean = false;
-// 	isCordova:boolean;
-// 	isIOS:boolean;
-// 	isAndroid:boolean;
+	mode:string = 'dev';
 
-// 	fbPermissions:any[];
+	ready:boolean = false;
+	isBrowser:boolean;
+	isIOS:boolean;
+	isAndroid:boolean;
 
-// 	constructor( 
-// 		public http:Http,
-// 		public events:Events,
-// 		public plt:Platform,
-// 		public fb:Facebook){
+	fbPermissions:any[];
 
-// 		this.isAndroid = plt.is('android');
-//     	this.isCordova = plt.is('cordova');
-//     	this.isIOS = plt.is('ios');
+	constructor( 
+		public http:Http,
+		public events:Events,
+		public plt:Platform,
+		public fb:Facebook){
 
-//     	this.fbPermissions = ['public_profile', 'email'];
+        this.fbPermissions = ['public_profile', 'user_friends', 'email'];
 
-//     	let fbInit = ()=>{
-//     		window.facebookConnectPlugin.browserInit('138072253579918', '549111bdfa1c347ac4662105ee727652');
-//     	}
+    	let fbInit = ()=>{
+            //window.facebookConnectPlugin.browserInit('138072253579918', '549111bdfa1c347ac4662105ee727652');
+            window.facebookConnectPlugin.browserInit('138072253579918', 'v2.11');
+    	}
 
-//     	plt.ready()
-//     	.then(source=>{
-// 			console.log(source);
-// 			console.log('iniciou o provider do fb');
+    	plt.ready()
+    	.then(source=>{
+			console.log(source);
+			console.log('iniciou o provider do fb');
 
-//     		if(this.isCordova){
-// 				console.log(window);
-//     			if(!window.facebookConnectPlugin){
-//     				setTimeout(()=>{
-//     					console.log(window.facebookConnectPlugin);
-//     					fbInit();
-//     				}, 2000);
-//     			}else{
-//     				console.log(window.facebookConnectPlugin);
-//     				fbInit();
-//     			}
-//     		}else{
-//     			console.log(window);
-//     			if(!window.facebookConnectPlugin){
-//     				setTimeout(()=>{
-//     					console.log(window.facebookConnectPlugin);
-//     					fbInit();
-//     				}, 2000);
-//     			}else{
-//     				console.log(window.facebookConnectPlugin);
-//     				fbInit();
-//     			}
-//     		}
-//     	})
-//     	.catch(err=>{
+    		if(!(this.plt.is('ios') || this.plt.is('android'))){
+    			if(!window.facebookConnectPlugin){
+    				setTimeout(()=>{
+    					console.log(window.facebookConnectPlugin);
+    					fbInit();
+    				}, 2000);
+    			}else{
+    				console.log(window.facebookConnectPlugin);
+    				fbInit();
+    			}
+    		}else{
+                console.log('não é browser.');
+    		}
+    	})
+    	.catch(err=>{
 
-//     	});
+    	});
 
 		
-// 	}
+	}
 
-// 	fbLogin():Promise<any>{
-// 		if(this.isCordova){
-// 			console.log('é cordova 1');
-// 			return new Promise((resolve, reject)=>{
-// 				console.log('é cordova 2');
-// 				window.facebookConnectPlugin.getLoginStatus(
-// 				(res)=>{
-// 					console.log('é cordova 3');
-// 					console.log(res);
-// 					if(res.status == 'connected') {
-// 						resolve(true);
-// 						return;
-// 					}else{
-// 						window.facebookConnectPlugin.login(this.fbPermissions, 
-// 						res=>{
-// 							console.log(res);
-// 							resolve(true);
-// 						},
-// 						err=>{
-// 							console.log(err);
-// 							reject(err);
-// 						})
-// 					}
-// 					//resolve(res);
-// 				},
-// 				(err)=>{
-// 					console.log(err);
-// 					reject(err);
-// 				});
-// 			});
-// 		}
-// 		else{
+	fbLogin():Promise<any>{
+		if(!(this.plt.is('ios') || this.plt.is('android'))){
+            
+			return new Promise((resolve, reject)=>{
+				window.facebookConnectPlugin.getLoginStatus(
+				(res)=>{
+					if(res.status == 'connected') {
+                        
+                        window.facebookConnectPlugin.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', ['public_profile', 'user_friends', 'email'], 
+						res=>{
+							resolve(res);
+						},
+						err=>{
+							reject(err);
+						})
+						return res;
+					}else{
+						window.facebookConnectPlugin.login(['public_profile', 'user_friends', 'email'], 
+						res=>{
+                            window.facebookConnectPlugin.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', ['public_profile', 'user_friends', 'email'], 
+                            res=>{
+                                resolve(res);
+                            },
+                            err=>{
+                                reject(err);
+                            })
+                            return res;
+						},
+						err=>{
+							reject(err);
+                        })
+                        
+					}
+					//resolve(res);
+				},
+				(err)=>{
+					console.log(err);
+					reject(err);
+				});
+			});
+		}
+		else{
+            console.log('não é browser');
+		}
 
-// 			return new Promise((resolve, reject)=>{
-// 				window.facebookConnectPlugin.getLoginStatus(
-// 				(res)=>{
-// 					console.log(res);
-// 					if(res.status == 'connected') {
-// 						resolve(true);
-// 						return;
-// 					}else{
-// 						window.facebookConnectPlugin.login(this.fbPermissions, 
-// 						res=>{
-// 							console.log(res);
-// 							resolve(true);
-// 						},
-// 						err=>{
-// 							console.log(err);
-// 							reject(err);
-// 						})
-// 					}
-// 					//resolve(res);
-// 				},
-// 				(err)=>{
-// 					console.log(err);
-// 					reject(err);
-// 				});
-// 			});
-
-// 		}
-
-// 	}
-// }
+	}
+}

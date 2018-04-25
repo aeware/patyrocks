@@ -10,6 +10,9 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title float-left>Paty Rocks</ion-title>
+    <button ion-button float-right color="light">
+      <img src="assets/imgs/logo.png" style="height: 44px;"/>
+    </button>
   </ion-navbar>
 </ion-header>
 
@@ -35,11 +38,11 @@
           <ion-input class="inputs" type="password" placeholder="Password" formControlName="password" [(ngModel)]="account.password"></ion-input>
         </ion-col>
       </ion-row>
-      <!-- <ion-row>
+      <ion-row>
         <ion-col col-12 text-center>
           <button type="button" class="btnFacebook" (click)="doLoginFB()" ion-button full>CONECTAR COM FACEBOOK</button>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
       <ion-row>
         <ion-col col-12 text-center>
           <button class="btnNormal" type="button" (click)="forgotPass()" ion-button>Esqueceu a senha?</button>

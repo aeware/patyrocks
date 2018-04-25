@@ -17,6 +17,7 @@
 
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
+  <script src="assets/js/cordova-facebook-connect-plugin.js"></script>
 
   <!-- un-comment this code to enable service worker
   <script>
@@ -45,5 +46,23 @@
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>
 
+  <!-- <script>
+    window.onload = function () {
+      var x = document.getElementById("scrollPos").getElementsByClassName("scroll-content")[0];
+      x.addEventListener("scroll", scroll_on);
+     }
+
+    function scroll_to(i){
+      var y = document.getElementById("scrollPos").getElementsByClassName("scroll-content")[0];
+      y.scrollTo((i*34),0);
+    }
+
+    function scroll_on(){
+      var z = document.getElementById("scrollPos").getElementsByClassName("scroll-content")[0];
+      var a = z.scrollLeft/34;
+      var xyz = document.getElementsByClassName("scroll-item");
+      xyz.item(a).getElementsByClassName("item-number")[0].click();
+    }
+  </script> -->
 </body>
 </html>

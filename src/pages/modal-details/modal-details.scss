@@ -2,14 +2,15 @@ page-modal-details {
 
 
     .labels{
-        border:none;
-        color:rgb(89,97,118);
-        font-size:12pt;
+        border: none;
+        color: #596176;
+        font-size: 12pt;
         padding-left: 30px;
-        width:100%!important;
-        max-width:100%!important;
-        height:40px;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 40px;
         vertical-align: middle;
+        padding: 11px 8px 0px 25px;
     }
 
     ion-select{
@@ -26,7 +27,7 @@ page-modal-details {
 
     .text-input-ios{
         margin: 0px!important;
-        padding:10px 0px 0px 0px!important;
+        // padding:10px 0px 0px 0px!important;
     }
     
     ion-col{
@@ -35,14 +36,14 @@ page-modal-details {
     }
     .icoEmpenho{
         position: absolute;
-        left: 15px;
-        top: 13px;
-        color: rgb(89,97,118);
+        color: #596176;
         z-index: 100;
+        height: 40px;
+        padding-top: 13px;
     }
     
     .icoEmpenho.icon-ios{
-        top:20px;
+        // top:20px;
     }
     .card{
         width: 40px;

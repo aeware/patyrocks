@@ -24,10 +24,6 @@ export class UploadphotoPage {
   constructor(public navCtrl: NavController, public base64: Base64,private camera: Camera, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) { }
  
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UploadphotoPage');
-  }
-
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',
@@ -63,12 +59,9 @@ export class UploadphotoPage {
    
     this.camera.getPicture(options).then((imagePath) => {
       this.base64.encodeFile(imagePath).then((base64String: string) => {
-        console.log("-----base64String-----" + base64String);
-        let imageSrc = base64String.split(",");
-        console.log("---Splitted image string----" + imageSrc[1]);
+        //let imageSrc = base64String.split(",");
       });
     }, (err) => {
-      console.log(JSON.stringify(err));
       this.presentToast('Error while selecting image.');
     });
   }

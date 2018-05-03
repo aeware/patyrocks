@@ -12,11 +12,9 @@
 	*/
 
 	document.addEventListener('DOMContentLoaded', function(e) {
-		//console.log('DOMContentLoaded', e);
 		var facebookConnectPlugin = {};
 
 		if (!window.cordova || window.cordova && window.cordova.platformId === 'browser') {
-			console.log('no cordova');
 
 			facebookConnectPlugin = {
 

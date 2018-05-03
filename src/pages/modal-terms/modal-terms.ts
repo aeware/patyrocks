@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams, AlertController, LoadingController, Loading, Events } from 'ionic-angular';
 
 // import { PaymentOkPage } from "../payment-ok/payment-ok";
 
@@ -25,7 +25,7 @@ export class ModalTermsPage {
   public eventDetails: any;
   public msg: string;
 
-  constructor(public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, public navParams: NavParams, private alertCtrl: AlertController,private view: ViewController) {
+  constructor(public events: Events, public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, public navParams: NavParams, private alertCtrl: AlertController,private view: ViewController) {
 
     this.loading = this.loadingCtrl.create({
       spinner: 'show',
@@ -53,13 +53,13 @@ export class ModalTermsPage {
       alert.present();
     });
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalTermsPage');
-  }
   
   closeModal() {
     this.view.dismiss();
+  }
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

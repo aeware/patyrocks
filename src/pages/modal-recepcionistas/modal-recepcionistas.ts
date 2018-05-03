@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavController } from 'ionic-angular';
+import { IonicPage, ViewController, NavController, Events } from 'ionic-angular';
 
 // import { EmpenhoPage } from "../empenho/empenho";
 
@@ -16,7 +16,7 @@ import { IonicPage, ViewController, NavController } from 'ionic-angular';
 })
 export class ModalRecepcionistasPage {
 
-  constructor(private view: ViewController, private navCtrl : NavController) {
+  constructor(public events: Events, private view: ViewController, private navCtrl : NavController) {
   }
 
   closeModal() {
@@ -30,5 +30,9 @@ export class ModalRecepcionistasPage {
   openEmpenho() {
     this.view.dismiss();
     this.navCtrl.setRoot('EmpenhoPage');
+  }
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 }

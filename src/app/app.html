@@ -4,9 +4,9 @@
       <ion-avatar *ngIf="account.logged" (click)="editUser()" class="imgUser" item-start>
         <img src="{{account.image}}"/>
       </ion-avatar>
-      <ion-title *ngIf="account.logged">{{account.name}}</ion-title>
-      <button class="btnEntrar" (click)="doLogin()" *ngIf="!account.logged" menuClose ion-button float-end>Login</button>
-      <button class="btnEntrar" (click)="doLogout()" *ngIf="account.logged" menuClose ion-button float-end>Logout</button>
+      <ion-title class="account-name" *ngIf="account.logged">{{account.name}}</ion-title>
+      <button class="btnEntrar" (click)="doLogin()" *ngIf="!account.logged" color="gray" menuClose ion-button float-end>Login</button>
+      <button class="btnEntrar" (click)="doLogout()" *ngIf="account.logged" color="gray" menuClose ion-button float-end>Logout</button>
     </ion-toolbar>
   </ion-header>
 

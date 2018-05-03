@@ -3,8 +3,8 @@
     <button ion-button menuToggle float-left>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title float-left>Paty Rocks</ion-title>
-    <button ion-button float-right color="light" (click)="faleCom()">
+    <ion-title float-left><img src="assets/imgs/title.png" style="width: 80px;"/></ion-title>
+    <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
       <img src="assets/imgs/logo.png" style="height: 44px;"/>
     </button>
   </ion-navbar>
@@ -13,12 +13,12 @@
 <ion-content>
   <h5 text-center padding>O que você precisa para o seu evento?</h5>
   <ion-card class="card" (click)="openBuffets()" style="background-image: url('assets/imgs/btn_buffet.jpg')">
-      <div class="card-title">Serviço de<br/> Buffet</div>
+      <div class="card-title"><img src="assets/imgs/txt_btn_buffet.png" style="width: auto;height:116px;margin: 0 auto;"/></div>
       <div class="card-btn">selecionar</div>
   </ion-card>
   <div style="clear:both;"></div>
   <ion-card class="card" (click)="openStaffs()"  style="background-image: url('assets/imgs/btn_equipe.jpg')">
-      <div class="card-title">Equipe</div>
+      <div class="card-title"><img src="assets/imgs/txt_btn_equipe.png" style="width: auto;height: 35px;margin: 27px auto;"/></div>
       <div class="card-btn">selecionar</div>
   </ion-card>
 </ion-content>

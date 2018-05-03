@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, ViewController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, IonicPage, ViewController, NavParams, AlertController, LoadingController, Loading, Events } from 'ionic-angular';
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 /**
@@ -32,7 +32,7 @@ export class ModalEventdayPage {
   //   showArrived: true
   // }
 
-  constructor(public loadingCtrl:LoadingController, public navCtrl: NavController, private alertCtrl: AlertController, private authServices: AuthServicesProvider, private view: ViewController, public params: NavParams) {
+  constructor(public events: Events, public loadingCtrl:LoadingController, public navCtrl: NavController, private alertCtrl: AlertController, private authServices: AuthServicesProvider, private view: ViewController, public params: NavParams) {
     this.loading = this.loadingCtrl.create({
       spinner: 'show',
       content: 'Carregando...'
@@ -120,9 +120,6 @@ export class ModalEventdayPage {
               content: 'Carregando...'
             });
             this.loading.present();
-            console.log('name: '+ this.myevent.user.firstname);
-            console.log('suid: '+staff.uuid);
-            console.log('esuid: '+staff.esuid);
             this.authServices.postData({name: this.myevent.user.firstname, suid: staff.uuid, esuid : staff.esuid}, "staff_payed").then((result) => {
               localStorage.set
               this.responseData = result;
@@ -143,8 +140,8 @@ export class ModalEventdayPage {
     alert.present();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalEventdayPage');
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

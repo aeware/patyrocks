@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, Events } from 'ionic-angular';
 
 // import { HomePage } from "../home/home";
 
@@ -18,7 +18,7 @@ import { AuthServicesProvider } from '../../providers/auth-services/auth-service
 })
 export class ContactusPage {
 
-  constructor(public navCtrl: NavController, public authServices: AuthServicesProvider, public alertCtrl: AlertController) {
+  constructor(public events: Events, public navCtrl: NavController, public authServices: AuthServicesProvider, public alertCtrl: AlertController) {
   }
 
   public userDetails: any;
@@ -59,10 +59,7 @@ export class ContactusPage {
       });
       alert.present();
 
-      console.log(2);
-
     }, (err) => {
-      console.log(err.status);
       if(err.status == 401){
         var retorno = JSON.parse(err._body);
 
@@ -82,8 +79,9 @@ export class ContactusPage {
       }
     });
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ContactusPage');
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

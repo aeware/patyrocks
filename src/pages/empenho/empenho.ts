@@ -92,11 +92,6 @@ export class EmpenhoPage {
     
   }
 
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EmpenhoPage');
-  }
-
   openLocation(){
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
@@ -104,7 +99,6 @@ export class EmpenhoPage {
 
     const myModal: Modal = this.modal.create('ModalLocationPage', {}, myModalOptions);
       myModal.onDidDismiss(data => {
-      console.log(data);
       if(data){
         this.event.location = data.street +', ' + data.number + ' - ' + data.neighborhood;
         this.event.number = data.number;

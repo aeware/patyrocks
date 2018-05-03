@@ -39,10 +39,6 @@ export class SigninPage {
       password: ['', Validators.required],
     });
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SigninPage');
-  }
  
   async doLogin(){
     if(this.frmSignin.valid){
@@ -58,9 +54,7 @@ export class SigninPage {
   }
   
   async doLoginFB(){
-
     this.events.publish('user:loginfb');
-
   }
 
   doSingUp(){
@@ -113,6 +107,10 @@ export class SigninPage {
       this.events.publish('alerts:toast','Digite seu e-mail.');
     }
     
+  }
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
  

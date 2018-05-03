@@ -1,4 +1,5 @@
 export interface Event {
+    return:boolean,
     uid : string,
     uuid : string,
     dateStart : string,
@@ -42,17 +43,20 @@ export interface Event {
     qtdCrepe : number,
     qtdAgua : number,
     qtdCerveja : number,
+    qtdAguaCerveja : number,
     qtdGin : number,
     valTotalBurguer : number,
     valTotalPizza : number,
     valTotalCrepe : number,
     valTotalAgua : number,
     valTotalCerveja : number,
+    valTotalAguaCerveja : number,
     valTotalGin : number,
     valBurguer : number,
     valPizza : number,
     valCrepe : number,
     valAgua : number,
     valCerveja : number,
+    valAguaCerveja : number,
     valGin : number
   }

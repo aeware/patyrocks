@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Ionic App</title>
+  <title>Paty Rocks</title>
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
@@ -14,6 +14,9 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- google maps api -->
+  <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=AIzaSyAQR85SH7YKVm4NPVEA0rDOwj3xt-P_9Rc" async defer></script>
 
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
@@ -46,23 +49,5 @@
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>
 
-  <!-- <script>
-    window.onload = function () {
-      var x = document.getElementById("scrollPos").getElementsByClassName("scroll-content")[0];
-      x.addEventListener("scroll", scroll_on);
-     }
-
-    function scroll_to(i){
-      var y = document.getElementById("scrollPos").getElementsByClassName("scroll-content")[0];
-      y.scrollTo((i*34),0);
-    }
-
-    function scroll_on(){
-      var z = document.getElementById("scrollPos").getElementsByClassName("scroll-content")[0];
-      var a = z.scrollLeft/34;
-      var xyz = document.getElementsByClassName("scroll-item");
-      xyz.item(a).getElementsByClassName("item-number")[0].click();
-    }
-  </script> -->
 </body>
 </html>

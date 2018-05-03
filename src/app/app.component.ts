@@ -16,7 +16,7 @@ import { AuthServicesProvider } from '../providers/auth-services/auth-services';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 import {SocialService} from '../providers/social-services/social-services';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import {Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 declare var FCMPlugin:any;
 
@@ -56,7 +56,7 @@ export class MyApp {
     this.account.logged = false;
     this.account.notifications = 0;
 
-    this.events.subscribe('user:created', (user) => {
+    this.events.subscribe('user:logged', (user) => {
       this.sendPhoto.uuid = this.account.uuid = user.uuid;
       this.account.name = user.firstname;
       if(user.image){ 
@@ -64,6 +64,59 @@ export class MyApp {
       }
       this.account.image = user.image;
       this.account.logged = true;
+    });
+
+    this.events.subscribe('user:signup', (user) => {
+
+      this.loading = this.loadingCtrl.create({
+        spinner: 'show',
+        content: 'Carregando...'
+      });
+      this.loading.present();
+      
+      this.authServices.postData(user, "register").then((result) => {
+        localStorage.set
+        this.responseData = result;
+
+        if(this.responseData.success){
+          //IF MOBILE
+          if(this.platform.is('ios') || this.platform.is('android')) {
+            this.registerFirebase(this.responseData.account.email);
+          }
+          this.updateAccount(this.responseData.account);
+          
+        }else{
+          this.toaster(this.responseData.status);
+        }
+
+        this.loading.dismiss();
+      }, (err) => {
+        this.loading.dismiss();
+        if(err.status == 409){
+          var retorno = JSON.parse(err._body);
+          
+          let alert = this.alertCtrl.create({
+            title: 'Paty Rocks',
+            subTitle: retorno.status,
+            buttons: ['OK']
+          });
+          alert.present();
+        }else{
+          let alert = this.alertCtrl.create({
+            title: 'Paty Rocks',
+            subTitle: 'Houve um problema em nossos servidores. Tente mais tarde!',
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  this.nav.setRoot('HomePage');
+                }
+              }
+            ]
+          });
+          alert.present();
+        }
+      });
     });
 
     this.events.subscribe('user:login', (user) => {
@@ -76,22 +129,21 @@ export class MyApp {
       this.account.email = user.email;
       this.account.password = user.password;
 
-      this.authServices.postData(this.account, "sessions").then((result) => {
+      this.authServices.postData(user, "sessions").then((result) => {
         localStorage.set
         this.responseData = result;
         if(this.responseData.success){
 
           //IF MOBILE
           if(this.platform.is('ios') || this.platform.is('android')) {
-            console.log('mobile');
             this.registerFirebase(this.responseData.account.email);
           }
           this.updateAccount(this.responseData.account);
+          
         }else{
+          this.loading.dismiss();
           this.toaster(this.responseData.status);
         }
-
-        this.loading.dismiss();
       }, (err) => {
         this.loading.dismiss();
         if(err.status == 401){
@@ -124,7 +176,7 @@ export class MyApp {
     this.events.subscribe('user:loginfb', () => {
       this.loading = this.loadingCtrl.create({
         spinner: 'show',
-        content: 'Carregando...' 
+        content: 'Carregando...'
       });
       this.loading.present();
 
@@ -138,11 +190,8 @@ export class MyApp {
           });
       }else{
         this.fb.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
-          
           this.fb.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
-  
             this.facebookLogin(profile);
-
           });
   
         }).catch(e => {
@@ -196,13 +245,11 @@ export class MyApp {
 
   //with FCM - from login
   registerFirebase(_email){
-    this.afAuth.auth.signInWithEmailAndPassword(_email, '123456').then((user) => {
-      this.FCMConnect();
-    }).catch(error => {
+
+    //autocalling subscribe event (FCMConnect)
+    this.afAuth.auth.signInWithEmailAndPassword(_email, '123456').catch(error => {
       if(error.code == 'auth/user-not-found'){
-        this.afAuth.auth.createUserWithEmailAndPassword(_email, '123456').then((user) => { 
-          this.FCMConnect();
-        });
+        this.afAuth.auth.createUserWithEmailAndPassword(_email, '123456');
       }else{
         this.toaster('Houve um erro na conexão. Tente mais tarde.');
       }
@@ -214,12 +261,16 @@ export class MyApp {
     this.afAuth.authState.subscribe((auth) => {
       if(auth){
         this.account.email = auth.email;
-        FCMPlugin.getToken((token) => {
-          localStorage.set
-          this.account.deviceToken = token;
-          this.updateToken(token, auth.email);
-        });
+        this.FCMgetToken(auth.email);
       }
+    });
+  }
+
+  FCMgetToken(_email){
+    FCMPlugin.getToken((token) => {
+      localStorage.set
+      this.account.deviceToken = token;
+      this.updateToken(token, _email);
     });
   }
 
@@ -236,19 +287,18 @@ export class MyApp {
       localStorage.set
       this.responseData = result;
       if(this.responseData.success){
-
         //IF MOBILE
         if(this.platform.is('ios') || this.platform.is('android')) {
-          console.log('mobile');
           this.registerFirebase(this.responseData.account.email);
-        }
+        }else{
+          this.updateAccount(this.responseData.account);
+        }       
 
-        this.updateAccount(this.responseData.account);
       }else{
+        this.loading.dismiss();
         this.toaster(this.responseData.status);
       }
 
-      this.loading.dismiss();
     }, (err) => {
       this.loading.dismiss();
       if(err.status == 401){
@@ -311,7 +361,6 @@ export class MyApp {
     this.account.logged = true;
 
     localStorage.setItem("account", JSON.stringify(_dados));
-    
     this.redirectToPage(this.responseData.account.type, _dados.first);
 
   }
@@ -319,6 +368,7 @@ export class MyApp {
 
   //redirect to the right page
   redirectToPage(_type, facebook_first){
+    this.loading.dismiss();
     if(facebook_first){
       this.nav.setRoot('OthersDataPage');
     }else if(_type == "staff"){
@@ -367,6 +417,7 @@ export class MyApp {
   }
 
   initializeApp() {
+    
     this.platform.ready().then(() => {
  
       localStorage.clear();
@@ -379,10 +430,8 @@ export class MyApp {
       this.loading.present();
       try {
         if(!(this.platform.is('ios') || this.platform.is('android'))) {
-          console.log('not mobile');
           this.rootPage = 'HomePage';
         }else{
-          console.log('mobile');
           this.FCMConnect();
         }
           
@@ -491,7 +540,7 @@ export class MyApp {
         {
           text: 'Whatsapp',
           handler: () => {
-            window.location.href = 'https://api.whatsapp.com/send?phone=5521965135903&text=Ol%C3%A1%20Paty,%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20de%20buffet';
+            window.location.href = 'https://api.whatsapp.com/send?phone=5521965135903&text=Ol%C3%A1%20Paty,%20gostaria%20de%20solicitar%20um%20or%C3%A7amento';
           }
         },
         {
@@ -504,7 +553,6 @@ export class MyApp {
           text: 'Voltar',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]

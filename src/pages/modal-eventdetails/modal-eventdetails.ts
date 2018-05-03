@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Modal, ModalController, NavController, ModalOptions, IonicPage, ViewController, NavParams, AlertController } from 'ionic-angular';
+import { Modal, ModalController, NavController, ModalOptions, IonicPage, ViewController, NavParams, AlertController, Events } from 'ionic-angular';
 
 // import { ModalConsiderationsPage } from "../modal-considerations/modal-considerations";
 // import { MyeventsPage } from '../myevents/myevents';
@@ -46,7 +46,7 @@ export class ModalEventdetailsPage {
     qtdAjudante: 0
   };
   
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, private authServices: AuthServicesProvider, private view: ViewController, private modal: ModalController, public params: NavParams) {
+  constructor(public events: Events, public navCtrl: NavController, private alertCtrl: AlertController, private authServices: AuthServicesProvider, private view: ViewController, private modal: ModalController, public params: NavParams) {
     this.myevent = params.get('data');
     this.myservices = this.myevent.services;
     this.myservices.forEach(element => {
@@ -127,8 +127,8 @@ export class ModalEventdetailsPage {
 
   }
 
-  ionViewDidLoad() {
-    
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

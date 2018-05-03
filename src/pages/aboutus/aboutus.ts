@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 /**
  * Generated class for the AboutusPage page.
@@ -15,11 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AboutusPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutusPage');
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

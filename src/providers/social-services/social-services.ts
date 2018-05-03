@@ -39,21 +39,16 @@ export class SocialService {
 
     	plt.ready()
     	.then(source=>{
-			console.log(source);
-			console.log('iniciou o provider do fb');
 
     		if(!(this.plt.is('ios') || this.plt.is('android'))){
     			if(!window.facebookConnectPlugin){
     				setTimeout(()=>{
-    					console.log(window.facebookConnectPlugin);
     					fbInit();
     				}, 2000);
     			}else{
-    				console.log(window.facebookConnectPlugin);
     				fbInit();
     			}
     		}else{
-                console.log('não é browser.');
     		}
     	})
     	.catch(err=>{
@@ -99,13 +94,11 @@ export class SocialService {
 					//resolve(res);
 				},
 				(err)=>{
-					console.log(err);
 					reject(err);
 				});
 			});
 		}
 		else{
-            console.log('não é browser');
 		}
 
 	}

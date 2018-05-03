@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, ViewController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { NavController, IonicPage, ViewController, NavParams, LoadingController, Loading, Events } from 'ionic-angular';
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
@@ -24,7 +24,7 @@ export class ModalEventreviewPage {
   public responseData:any;
   public mystaffs:any;
 
-  constructor(public loadingCtrl:LoadingController, public navCtrl: NavController, private authServices: AuthServicesProvider, private view: ViewController, public params: NavParams) {
+  constructor(public events: Events, public loadingCtrl:LoadingController, public navCtrl: NavController, private authServices: AuthServicesProvider, private view: ViewController, public params: NavParams) {
     this.loading = this.loadingCtrl.create({
       spinner: 'show',
       content: 'Carregando...'
@@ -52,10 +52,6 @@ export class ModalEventreviewPage {
       // occupation: 'Milkman'
     };
     this.view.dismiss(data);
-  }
-
-  onModelChange(value){
-    console.log(value);
   }
 
   enviar(){
@@ -88,9 +84,9 @@ export class ModalEventreviewPage {
       });
     });
   }
-  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalEventreviewPage');
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

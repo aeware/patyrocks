@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Events } from 'ionic-angular';
 
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
@@ -25,7 +25,7 @@ export class ModalLocationPage {
   geo = new google.maps.Geocoder();
   ret_event;
 
-  constructor(public navCtrl: NavController, public toast: ToastController, public navParams: NavParams, public view: ViewController, private zone: NgZone) {
+  constructor(public events: Events, public navCtrl: NavController, public toast: ToastController, public navParams: NavParams, public view: ViewController, private zone: NgZone) {
     this.autocompleteItems = [];
     this.autocomplete = {
       query: ''
@@ -42,14 +42,6 @@ export class ModalLocationPage {
         lat: '',
         lng: ''
     }
-  }
-
-  ionCancel(){
-    this.view.dismiss();
-  }
-
-  dismiss() {
-    this.view.dismiss();
   }
  
   chooseItem(item: any) {
@@ -126,13 +118,6 @@ export class ModalLocationPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalLocationPage');
-   // setTimeout(() => {
-      
-    //},150);
-  }
-
   presentToast(msg:string) {
     let toast = this.toast.create({
       message: msg,
@@ -149,6 +134,14 @@ export class ModalLocationPage {
     }else{
       return false;
     }
+  }
+
+  closeModal() {
+    this.view.dismiss();
+  }
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

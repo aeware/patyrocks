@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading, Events } from 'ionic-angular';
 
 // import { PaymentOkPage } from "../payment-ok/payment-ok";
 import { Event } from "../../models/event/event.interface";
@@ -33,7 +33,7 @@ export class PaymentPage {
   public msg: string;
   event = {} as Event;
 
-  constructor(public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController ) {
+  constructor(public events: Events, public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController ) {
 
     this.loading = this.loadingCtrl.create({
       spinner: 'show',
@@ -106,9 +106,8 @@ export class PaymentPage {
     });
   }
 
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PaymentPage');
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

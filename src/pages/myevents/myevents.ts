@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Modal, ModalController, ModalOptions, IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { Modal, ModalController, ModalOptions, IonicPage, NavController, NavParams, LoadingController, Loading, Events } from 'ionic-angular';
 
 // import { ModalEventdayPage } from "../modal-eventday/modal-eventday";
 // import { ModalEventdetailsPage } from "../modal-eventdetails/modal-eventdetails";
@@ -30,7 +30,7 @@ export class MyeventsPage {
   public myevent: any;
   responseData: any;
 
-  constructor(public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public events: Events, public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl: NavController, public navParams: NavParams) {
     
     this.loading = this.loadingCtrl.create({
       spinner: 'show',
@@ -50,7 +50,6 @@ export class MyeventsPage {
         this.loading.dismiss();
       }
     }, (err) => {
-      console.log(JSON.stringify(err));
       this.loading.dismiss();
     });
   }
@@ -77,7 +76,7 @@ export class MyeventsPage {
     }else {
       page = 'ModalEventdayPage';
     }
-    console.log(page);
+    
     const myModal: Modal = this.modal.create(page, { data: this.myevent }, myModalOptions);
 
     myModal.present();
@@ -95,7 +94,7 @@ export class MyeventsPage {
       this.authServices.postData({uuid : this.userDetails.uuid}, "events").then((result) => {
         localStorage.set
         this.responseData = result;
-        console.log(JSON.stringify(this.responseData));
+        
         if(this.responseData.success){
           this.myevents = this.responseData.events;
           this.loading.dismiss();
@@ -107,8 +106,8 @@ export class MyeventsPage {
   
   }
   
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyeventsPage');
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

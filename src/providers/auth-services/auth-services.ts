@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-let apiURL = 'https://www.aeservices.com.br/api/patyrocks/v1.2/';
+let apiURL = 'https://www.aeservices.com.br/api/patyrocks/v1.3/';
 /*
   Generated class for the AuthServicesProvider provider.
 

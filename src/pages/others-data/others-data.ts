@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Modal, ModalController, ModalOptions, AlertController, IonicPage, NavController, LoadingController, Loading } from 'ionic-angular';
+import { Modal, ModalController, ModalOptions, AlertController, IonicPage, NavController, LoadingController, Loading, Events } from 'ionic-angular';
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 import { AngularFireAuth } from "angularfire2/auth"; 
@@ -40,7 +40,7 @@ export class OthersDataPage {
     iagree: false
   }
 
-  constructor(private loadingCtrl: LoadingController, private formBuilder:FormBuilder, public toast: ToastController, public afAuth:AngularFireAuth, public authServices: AuthServicesProvider, public alertCtrl: AlertController, private modal: ModalController, public navCtrl : NavController) {
+  constructor(public events: Events, private loadingCtrl: LoadingController, private formBuilder:FormBuilder, public toast: ToastController, public afAuth:AngularFireAuth, public authServices: AuthServicesProvider, public alertCtrl: AlertController, private modal: ModalController, public navCtrl : NavController) {
     this.frmRegEdit = this.formBuilder.group({
       iagree: ['', Validators.required],
       phonenumber:  ['', Validators.required]
@@ -64,7 +64,6 @@ export class OthersDataPage {
         });
         this.loading.present();
         
-        console.log(JSON.stringify(this.register));
         this.authServices.postData(this.register, "regupdate").then((result) => {
           
           localStorage.set
@@ -91,7 +90,6 @@ export class OthersDataPage {
           
         }, (err) => {
           this.loading.dismiss();
-          console.log(JSON.stringify(err));
           if(err.status == 409){
             var retorno = JSON.parse(err._body);
             
@@ -132,10 +130,6 @@ export class OthersDataPage {
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad OthersDataPage');
-  }
-
   presentToast(msg:string) {
     let toast = this.toast.create({
       message: msg,
@@ -155,6 +149,10 @@ export class OthersDataPage {
     const myModal: Modal = this.modal.create('ModalTermsPage', {}, myModalOptions);
 
     myModal.present();
+  }
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading, Events } from 'ionic-angular';
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 /**
@@ -23,7 +23,7 @@ export class PaymentOkPage {
   public msg: string;
 
 
-  constructor(public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController ) {
+  constructor(public events: Events, public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController ) {
     localStorage.removeItem('empenho');
 
     this.loading = this.loadingCtrl.create({
@@ -53,11 +53,12 @@ export class PaymentOkPage {
   }
 
   openDashboard(){
-    this.navCtrl.setRoot('MyeventsPage');
+    this.navCtrl.setRoot('HomePage');
+    //this.navCtrl.setRoot('MyeventsPage');
   } 
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PaymentOkPage');
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

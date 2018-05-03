@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController } from 'ionic-angular';
+import { IonicPage, ViewController, Events } from 'ionic-angular';
 
 /**
  * Generated class for the ModalConsiderationsPage page.
@@ -15,7 +15,7 @@ import { IonicPage, ViewController } from 'ionic-angular';
 })
 export class ModalConsiderationsPage {
 
-  constructor(private view: ViewController) {
+  constructor(public events: Events, private view: ViewController) {
   }
 
   closeModal() {
@@ -26,8 +26,7 @@ export class ModalConsiderationsPage {
     this.view.dismiss(data);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalConsiderationsPage');
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
-
 }

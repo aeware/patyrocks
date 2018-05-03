@@ -64,13 +64,16 @@ page-calculate{
         padding-left: 10px;
         vertical-align: bottom;
         background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
     }
     .less_plus{
-        position:absolute;
-        right:10px;
-        height:70px;
-        padding-top:25px;
+        text-align: center;
+        position: absolute;
+        right: 0px;
+        height: 70px;
+        padding-top: 18px;
         z-index: 2000;
+        width: 110px;
     }
     
     .btnMenos, .btnMais{

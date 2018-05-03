@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Modal, ModalController, ModalOptions, IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { Modal, ModalController, ModalOptions, IonicPage, NavController, NavParams, LoadingController, Loading, Events } from 'ionic-angular';
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
@@ -28,7 +28,7 @@ export class StaffeventsPage {
   public myevents: any;
   responseData: any;
 
-  constructor(private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public events: Events, private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl: NavController, public navParams: NavParams) {
     this.carregaTela();
   }
 
@@ -68,11 +68,7 @@ export class StaffeventsPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StaffeventsPage');
-  }
-
-  public tratamentoDia(){
+  tratamentoDia(){
     var d = new Date();
     var hour = d.getHours();
     if(hour < 5)
@@ -100,6 +96,10 @@ export class StaffeventsPage {
       return "Bom Dia";
     }
   
+  }
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 
 }

@@ -96,7 +96,7 @@ export class CalculatePage {
         this.loading.dismiss();
       });
   }
-
+ 
   validaTela(){
     var a = this.event.qtdBartender + this.event.qtdGarcom + this.event.qtdAjudante + this.event.qtdRecepcionista + this.event.qtdChurrasqueiro;
     if(a > 0)
@@ -187,11 +187,13 @@ export class CalculatePage {
       enableBackdropDismiss: false
     };
 
-    const myModal: Modal = this.modal.create('ModalDetailsPage', { data : this.event}, myModalOptions);
+    const myModal: Modal = this.modal.create('ModalDetailsPage', { data : this.event, attendees : true}, myModalOptions);
       myModal.onDidDismiss(data => {
       
-      if(data){
+      if(!data.return){
         this.checkout();
+      }else{
+        this.events.publish('alerts:toast','Confirme os detalhes na tela anterior para continuar.');
       }
     });
     myModal.present();
@@ -297,5 +299,9 @@ export class CalculatePage {
     const myModal: Modal = this.modal.create('ModalRecepcionistasPage', { /*data: myModalData*/ }, myModalOptions);
 
     myModal.present();
+  }
+
+  faleCom(){
+    this.events.publish('alerts:contactUs');
   }
 }

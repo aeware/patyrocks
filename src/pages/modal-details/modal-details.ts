@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { IonicPage, ViewController, NavController, NavParams, LoadingController, Loading, Modal, ModalController, ModalOptions } from 'ionic-angular';
+import { IonicPage, ViewController, NavController, NavParams, LoadingController, Loading, Modal, ModalController, ModalOptions, Events } from 'ionic-angular';
+
+import { Event } from "../../models/event/event.interface";
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
@@ -25,46 +27,13 @@ export class ModalDetailsPage {
   public userDetails: any;  
   responseData : any;
   eventDetails : any;
-  public event = {
-    uid:'',
-    dateStart: '',
-    timeStarts: '',
-    duration: '',
-    location: '',
-    zipcode: '',
-    complement: '',
-    street: '',
-    neighborhood: '',
-    city: '',
-    state: '',
-    country: '',
-    lat: '',
-    lng: '',
-    attendees: '',
-    type: '',
-    uuid:'',
-    number: '',
-    qtdBartender: 0,
-    qtdGarcom: 0,
-    qtdAjudante: 0,
-    qtdRecepcionista: 0,
-    qtdChurrasqueiro: 0,
-    valTotalBartender: 0,
-    valTotalGarcom: 0,
-    valTotalAjudante: 0,
-    valTotalRecepcionista: 0,
-    valTotalChurrasqueiro: 0,
-    valBartender: 0,
-    valGarcom: 0,
-    valAjudante: 0,
-    valRecepcionista: 0,
-    valChurrasqueiro: 0,
-    valorTotal: 0
-  }
+  event = {} as Event;
+  public attendee_read : boolean;
 
-  constructor(private view: ViewController, public authServices: AuthServicesProvider, private loadingCtrl: LoadingController, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, public toast: ToastController, public params: NavParams) {
+
+  constructor(public events: Events, private view: ViewController, public authServices: AuthServicesProvider, private loadingCtrl: LoadingController, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, public toast: ToastController, public params: NavParams) {
     this.frmDetalhes = this.formBuilder.group({
-      complement: [''], 
+      complement: ['', Validators.required], 
       location: ['', Validators.required],
       type: ['', Validators.required],
       attendees: ['', Validators.required],
@@ -89,8 +58,8 @@ export class ModalDetailsPage {
     this.loading.present();
 
     this.event = params.get('data');
-    console.log(JSON.stringify(this.event));
-    
+    this.attendee_read = params.get('attendees');
+
     this.authServices.getData("service_types").then((result) => {
       localStorage.set
       this.responseData = result;
@@ -104,6 +73,13 @@ export class ModalDetailsPage {
 
     });
 
+  }
+
+  attendees_read(){
+    if(!this.attendee_read)
+      return true;
+    else
+      return false;
   }
 
   finalizar() {
@@ -126,7 +102,7 @@ export class ModalDetailsPage {
         if(this.userDetails){
           this.event.uuid = this.userDetails.uuid; 
         }
-
+        this.event.return = false;
         this.view.dismiss(this.event);
         
       }
@@ -143,6 +119,8 @@ export class ModalDetailsPage {
         this.presentToast('Selecione o tipo do evento.');
       }else if (!this.frmDetalhes.controls.location.valid) {
         this.presentToast('Digite a localização.');
+      }else if (!this.frmDetalhes.controls.complement.valid) {
+        this.presentToast('Digite o complemento.');
       }
     }
   }
@@ -185,8 +163,13 @@ export class ModalDetailsPage {
     toast.present();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalDetailsPage');
+  faleCom(){
+    this.events.publish('alerts:contactUs');
+  }
+
+  closeModal() {
+    this.event.return = true;
+    this.view.dismiss(this.event);
   }
 
 }

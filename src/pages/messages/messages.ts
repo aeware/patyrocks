@@ -23,8 +23,4 @@ export class MessagesPage {
     this.navCtrl.push('MessagePage');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MessagesPage');
-  }
-
 }

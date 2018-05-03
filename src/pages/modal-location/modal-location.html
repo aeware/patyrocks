@@ -1,9 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-searchbar type="text" [(ngModel)]="autocomplete.query" cancelButtonText="Cancelar" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()" placeholder="Digite o endereço"></ion-searchbar>
-  </ion-toolbar>
+  <ion-navbar>
+      <button ion-button (click)="closeModal()" color="light" class="btnVoltar" float-left><ion-icon name="arrow-back"></ion-icon></button>
+    <ion-title float-left>Digite o endereço</ion-title>
+    <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
+      <img src="assets/imgs/logo.png" style="height: 44px;"/>
+    </button>
+  </ion-navbar>
 </ion-header>
 <ion-content>
+    <ion-searchbar type="text" [(ngModel)]="autocomplete.query" cancelButtonText="Cancelar" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="closeModal()" placeholder="Digite o endereço"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
       {{ item.description }}

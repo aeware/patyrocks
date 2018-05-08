@@ -65,7 +65,7 @@ export class ModalEventreviewPage {
 
     this.loading.present();
     this.mystaffs.forEach(element => {
-      this.authServices.postData({rate: element.rate, suid: element.uuid, esuid : element.esuid, description: element.description}, "staff_rate").then((result) => {
+      this.authServices.postData({rate: element.rate, uuid: element.uuid, esuid : element.esuid, description: element.description}, "product_rate").then((result) => {
         localStorage.set
         this.responseData = result;
         _cont++;

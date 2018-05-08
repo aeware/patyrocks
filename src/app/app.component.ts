@@ -80,9 +80,9 @@ export class MyApp {
 
         if(this.responseData.success){
           //IF MOBILE
-          if(this.platform.is('ios') || this.platform.is('android')) {
-            this.registerFirebase(this.responseData.account.email);
-          }
+          // if(this.platform.is('ios') || this.platform.is('android')) {
+          //   this.registerFirebase(this.responseData.account.email);
+          // }
           this.updateAccount(this.responseData.account);
           
         }else{
@@ -135,9 +135,9 @@ export class MyApp {
         if(this.responseData.success){
 
           //IF MOBILE
-          if(this.platform.is('ios') || this.platform.is('android')) {
-            this.registerFirebase(this.responseData.account.email);
-          }
+          // if(this.platform.is('ios') || this.platform.is('android')) {
+          //   this.registerFirebase(this.responseData.account.email);
+          // }
           this.updateAccount(this.responseData.account);
           
         }else{
@@ -174,6 +174,15 @@ export class MyApp {
     });
 
     this.events.subscribe('user:loginfb', () => {
+      // alert(this.platform.is('ios'));
+      // alert(this.platform.is('android'));//ok no mobileWeb - ok no app
+      // alert(this.platform.is('cordova'));//ok no desk - ok no mobileWeb - ok no app
+      // alert(this.platform.is('mobileweb'));
+      // alert(this.platform.is('core'));//ok no desk
+      // alert(this.platform.is('mobile'));//ok no mobileWeb - ok no app
+      
+      
+      
       this.loading = this.loadingCtrl.create({
         spinner: 'show',
         content: 'Carregando...'
@@ -288,11 +297,11 @@ export class MyApp {
       this.responseData = result;
       if(this.responseData.success){
         //IF MOBILE
-        if(this.platform.is('ios') || this.platform.is('android')) {
-          this.registerFirebase(this.responseData.account.email);
-        }else{
+        // if(this.platform.is('ios') || this.platform.is('android')) {
+        //   this.registerFirebase(this.responseData.account.email);
+        // }else{
           this.updateAccount(this.responseData.account);
-        }       
+        //}       
 
       }else{
         this.loading.dismiss();
@@ -338,8 +347,8 @@ export class MyApp {
       }else{
         this.toaster('Houve um problema com o login. Logue-se novamente.');
 
-        if(this.platform.is('ios') || this.platform.is('android'))
-          this.afAuth.auth.signOut();
+        // if(this.platform.is('ios') || this.platform.is('android'))
+        //   this.afAuth.auth.signOut();
       }
     });
   }
@@ -372,7 +381,7 @@ export class MyApp {
     if(facebook_first){
       this.nav.setRoot('OthersDataPage');
     }else if(_type == "staff"){
-      if(!(this.platform.is('ios') || this.platform.is('android'))) {
+      //if(!(this.platform.is('ios') || this.platform.is('android'))) {
         let alert = this.alertCtrl.create({
           title: 'Paty Rocks',
           subTitle: 'Baixe o aplicativo!',
@@ -386,9 +395,9 @@ export class MyApp {
           ]
         });
         alert.present();
-      }else{
-        this.rootPage = 'StaffdashboardPage';
-      }
+      // }else{
+      //   this.rootPage = 'StaffdashboardPage';
+      // }
     }else{
       this.event = JSON.parse(localStorage.getItem('empenho'));
 
@@ -429,11 +438,11 @@ export class MyApp {
       });
       this.loading.present();
       try {
-        if(!(this.platform.is('ios') || this.platform.is('android'))) {
+        //if(!(this.platform.is('ios') || this.platform.is('android'))) {
           this.rootPage = 'HomePage';
-        }else{
-          this.FCMConnect();
-        }
+        // }else{
+        //   this.FCMConnect();
+        // }
           
       } catch (error) {
         localStorage.clear();
@@ -456,8 +465,8 @@ export class MyApp {
 
   doLogout(){
 
-    if(this.platform.is('ios') || this.platform.is('android'))
-      this.afAuth.auth.signOut();
+    // if(this.platform.is('ios') || this.platform.is('android'))
+    //   this.afAuth.auth.signOut();
 
     localStorage.clear();
     this.account.name = '';

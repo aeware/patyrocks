@@ -27,7 +27,6 @@ page-calculate{
     
     ion-col{
         position:relative;
-        border-bottom:1px solid rgb(233,240,247);
     }
     .icoEmpenho{
         position: absolute;
@@ -47,8 +46,9 @@ page-calculate{
         background-position: center;
         -webkit-box-shadow: none;
         box-shadow: none;
-        margin: 0;
+        margin: 0 0 3px 0;
         position: relative;
+        // border-bottom:1px solid rgb(233,240,247);
     }
     .titulo{
         position: absolute;
@@ -123,6 +123,107 @@ page-calculate{
     }
     .asterisco{
         font-size:8pt;
+    }
+
+    h5{
+        margin:20px 0 0;
+        color: #596176;
+        text-align: center;
+    }
+    .txt-attendees{
+        display: inline-block;
+        width: 50px;
+    }
+    .row-scroll{
+        padding: 0 10%!important; 
+    }
+
+    .col-scroll{
+        padding: 0!important;
+    }
+    ion-scroll[scrollX] {
+        height: 100%;
+        white-space: nowrap;
+        .scroll-content{
+            height: 60px;
+            padding: 0 0%!important;
+        }
+        .scroll-item {
+            text-align: center;
+            display: inline-block;
+            min-width: 30px;
+            color: #98999e;
+            font-size: 9pt;
+        }
+        .scroll-item-space{
+            display: inline-block;
+            width: 95px;
+        }
+        .item-selected {
+            width: 30px;
+            color: #f77062;
+            font-size: 14pt;
+        }
+    }
+
+    #footer {
+        height: 115px;
+    }
+    .row-scroll {
+        height: 50px;
+        width: 100%;
+        padding: 0 !important;
+        background-color: #fff;
+        z-index: 3000;
+    }
+    .espaco-botao {
+        display: block;
+        clear: both;
+        height: 105px;
+        width: 100%;
+    }
+    ion-item{
+        padding: 0px!important;
+        margin: 0px!important;
+        float: left!important;
+        width: calc(100% - 150px)!important;
+        margin-left:30px!important;
+    }
+    ion-range{
+        height: 48px!important;
+    }
+    h5 {
+        margin: 0px 0 0;
+        color: #596176;
+        text-align: center;
+        font-size: 7pt;
+        width: 100px;
+        float: left;
+        padding: 10px;
+    }
+    .txt-attendees {
+        display: inline-block;
+        width: 100%;
+        vertical-align: top;
+        padding:0px!important;
+        margin:0px!important;
+    }
+
+    .text-input-md {
+        margin: 1px 0px;
+        text-align: center;
+        font-size: 16pt;
+        width: 100%;
+    }
+    .text-input-ios {
+        padding:0px!important;
+        margin:0px!important;
+        text-align: center;
+        font-size: 16pt;
+        width: 100%;
+    }
+    .item-ios.item-block .item-inner{
+        border:0px;
     }
 } 
 

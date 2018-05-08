@@ -68,42 +68,14 @@
             </ion-avatar>
             <h2>{{staff.stafftype}} - {{staff.staff.firstname}} {{staff.staff.lastname}}</h2>
             <button class="okCheck" item-end>Confirmado!</button>
-        </ion-item>
+        </ion-item> 
     </ion-list>
     <ion-grid *ngIf="!myevent.is_time">
-        <ion-row>
+        <ion-row *ngFor="let service of myservices;">
             <ion-col col-12> 
-                <ion-card style="background-image:url('assets/imgs/Barman.jpg')">
+                <ion-card [style.backgroundImage]="'url(' + service.image + ')'">
                 </ion-card>
-                <div class="titulo">Bartender x<ion-input class="labels qtdED" readonly="true" [(ngModel)]="myeventQty.qtdBartender"></ion-input></div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-12>
-                <ion-card style="background-image:url('assets/imgs/Churrasqueiro.jpg')">
-                </ion-card>
-                <div class="titulo">Churrasqueiro x<ion-input class="labels qtdED" readonly="true" [(ngModel)]="myeventQty.qtdChurrasqueiro"></ion-input></div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-12>
-                <ion-card style="background-image:url('assets/imgs/Garcom.jpg')">
-                </ion-card>
-                <div class="titulo">Garçom x<ion-input class="labels qtdED" readonly="true" [(ngModel)]="myeventQty.qtdGarcom"></ion-input></div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-12>
-                <ion-card style="background-image:url('assets/imgs/AjudanteGeral.jpg')">
-                </ion-card>
-                <div class="titulo">Ajudante Geral x<ion-input class="labels qtdED" readonly="true" [(ngModel)]="myeventQty.qtdAjudante"></ion-input></div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-12>
-                <ion-card style="background-image:url('assets/imgs/Recepcionista.jpg')">
-                </ion-card>
-                <div class="titulo">Recepcionista x<ion-input class="labels qtdED" readonly="true" [(ngModel)]="myeventQty.qtdRecepcionista"></ion-input></div>
+                <div class="titulo">{{service.service}} x {{service.quantity}}</div>
             </ion-col>
         </ion-row>
         <ion-row>

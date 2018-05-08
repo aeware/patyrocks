@@ -19,87 +19,38 @@
 <ion-content>
   <form [formGroup]="frmCalculate" (ngSubmit)="openCheckout()">
     <ion-grid>
-      <ion-row padding-horizontal>
+      <ion-row *ngFor="let item of event.items">
         <ion-col col-12>
-            <ion-icon class="icoEmpenho" name="timer"></ion-icon>
-            <ion-select class="labels" cancelText="Cancelar" (ionChange)="atualizaCalculos()" interface="action-sheet" placeholder="Duração" formControlName="duration" [(ngModel)]="event.duration">
-              <ion-option value="4">4 horas</ion-option>
-              <ion-option value="6">6 horas</ion-option>
-              <ion-option value="8">8 horas</ion-option>
-            </ion-select>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_bartender.jpg')">
-            <div class="titulo" (click)="openBartenders()">Bartender <ion-icon name="information-circle"></ion-icon></div>
+          <ion-card full [style.backgroundImage]="'url(' + item.image + ')'" >
+            <div class="titulo" (click)="openModal(item)">{{item.name}} <ion-icon name="information-circle"></ion-icon></div>
             <div class="less_plus">
-              <button class="btnMenos" type="button" ion-button (click)="setQtdLess('bartender')"><ion-icon name="remove"></ion-icon></button>
-              <p class="qtd">{{event.qtdBartender}}</p>
-              <button class="btnMais" type="button" ion-button (click)="setQtdPlus('bartender')"><ion-icon name="add"></ion-icon></button>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_churrasqueiro.jpg')">
-            <div class="titulo" (click)="openBbqs()">Churrasqueiro <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-              <button class="btnMenos" type="button" ion-button (click)="setQtdLess('bbq')"><ion-icon name="remove"></ion-icon></button>
-              <p class="qtd">{{event.qtdChurrasqueiro}}</p>
-              <button class="btnMais" type="button" ion-button (click)="setQtdPlus('bbq')"><ion-icon name="add"></ion-icon></button>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_garcom.jpg')">
-            <div class="titulo" (click)="openGarcons()">Garçom <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-              <button class="btnMenos" type="button" ion-button (click)="setQtdLess('garcom')"><ion-icon name="remove"></ion-icon></button>
-              <p class="qtd">{{event.qtdGarcom}}</p>
-              <button class="btnMais" type="button" ion-button (click)="setQtdPlus('garcom')"><ion-icon name="add"></ion-icon></button>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card (click)="openGerais()" style="background-image:url('assets/imgs/btn_ajudante.jpg')">
-            <div class="titulo">Copeiro <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-              <button class="btnMenos" type="button" ion-button (click)="setQtdLess('ajudante')"><ion-icon name="remove"></ion-icon></button>
-              <p class="qtd">{{event.qtdAjudante}}</p>
-              <button class="btnMais" type="button" ion-button (click)="setQtdPlus('ajudante')"><ion-icon name="add"></ion-icon></button>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_recepcionista.jpg')">
-            <div class="titulo" (click)="openRecepcionistas()">Recepcionista <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-              <button class="btnMenos" type="button" ion-button (click)="setQtdLess('recepcao')"><ion-icon name="remove"></ion-icon></button>
-              <p class="qtd">{{event.qtdRecepcionista}}</p>
-              <button class="btnMais" type="button" ion-button (click)="setQtdPlus('recepcao')"><ion-icon name="add"></ion-icon></button>
-            </div>
+                <button class="btnMenos" type="button" ion-button (click)="setQtd(item.tag, 'less')"><ion-icon name="remove"></ion-icon></button>
+                <p class="qtd">{{item.qty}}</p>
+                <button class="btnMais" type="button" ion-button (click)="setQtd(item.tag, 'plus')"><ion-icon name="add"></ion-icon></button>
+              </div>
           </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-input type="hidden" class="txt-duration" placeholder="0" formControlName="duration" [(ngModel)]="event.duration" ></ion-input>
   </form>
   <div class="espaco-botao"></div>
 </ion-content>
 <div id="footer" full float-end>
   <div class="valTotal">
     <ion-grid>
+      <ion-row class="row-scroll">
+        <ion-col col-12 class="borderToFooter">
+            <h5>Duração(horas)<ion-input type="text" class="txt-duration" placeholder="0" [(ngModel)]="event.duration" ></ion-input></h5>
+            <ion-item>
+              <ion-range min="4" max="8" step="2" snaps="true" color="default" (ionChange)="setQtd(null, 'duration')" [(ngModel)]="event.duration"></ion-range>
+            </ion-item>
+        </ion-col>
+      </ion-row>
       <ion-row>
           <ion-col col-6 class="borderToFooter">
             <div class="btnTotalNew">
-                <ion-icon class="icoCart" name="cart"></ion-icon><p class="totais">Valor Total:<br/> {{event.valorTotal | currency:"R$ ":0}}</p>
+                <ion-icon class="icoCart" name="cart"></ion-icon><p class="totais">Valor Total:<br/> {{event.valueTotal | currency:"R$ ":0}}</p>
             </div>
           </ion-col>
           <ion-col col-6 class="borderToFooter">

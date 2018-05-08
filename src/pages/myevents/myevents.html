@@ -19,13 +19,28 @@
 <ion-content>
   <h3 padding-left>Meus eventos</h3>
 
-  <ion-card *ngFor="let myevent of myevents"  margin-top><!-- (click)="openEvent(myevent)" -->
+  <div *ngIf="myevents?.length === 0">
+    <ion-grid>
+        <ion-row>
+          <ion-col col-12 text-center>
+            <img src="assets/imgs/logo.png"/>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 text-center>
+            Nenhum evento solicitado
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+  </div>
+  
+  <ion-card *ngFor="let myevent of myevents"  margin-top (click)="openEvent(myevent)" >
     <div class="tags">
         <ion-badge *ngFor="let flag of myevent.flags" class="{{flag.tag}}">{{flag.name}}</ion-badge>
     </div>
     <div class="titulo"><ion-input class="labels" readonly="true" [(ngModel)]="myevent.typename"></ion-input></div>
     <div class="date"><ion-datetime class="labels" disabled="true"  displayFormat="DDD, DD MMM YYYY" [(ngModel)]="myevent.dateStart"></ion-datetime></div>
-    <!-- <ion-icon class="seta" name="arrow-forward"></ion-icon> -->
+    <ion-icon class="seta" name="arrow-forward"></ion-icon>
   </ion-card>
   
 </ion-content>

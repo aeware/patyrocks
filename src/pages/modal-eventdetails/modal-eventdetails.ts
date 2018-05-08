@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Modal, ModalController, NavController, ModalOptions, IonicPage, ViewController, NavParams, AlertController, Events } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 
 // import { ModalConsiderationsPage } from "../modal-considerations/modal-considerations";
 // import { MyeventsPage } from '../myevents/myevents';
@@ -46,30 +47,11 @@ export class ModalEventdetailsPage {
     qtdAjudante: 0
   };
   
-  constructor(public events: Events, public navCtrl: NavController, private alertCtrl: AlertController, private authServices: AuthServicesProvider, private view: ViewController, private modal: ModalController, public params: NavParams) {
+  constructor(public events: Events, public sanitizer : DomSanitizer, public navCtrl: NavController, private alertCtrl: AlertController, private authServices: AuthServicesProvider, private view: ViewController, private modal: ModalController, public params: NavParams) {
     this.myevent = params.get('data');
     this.myservices = this.myevent.services;
     this.myservices.forEach(element => {
-      switch (element.staffTypeId) {
-        case '1':
-          this.myeventQty.qtdBartender = element.quantity;
-          break;
-        case '2':
-          this.myeventQty.qtdGarcom = element.quantity;
-          break;
-        case '3':
-          this.myeventQty.qtdRecepcionista = element.quantity;
-          break;
-        case '4':
-          this.myeventQty.qtdAjudante = element.quantity;
-          break;
-        case '5':
-          this.myeventQty.qtdChurrasqueiro = element.quantity;
-          break;
-      
-        default:
-          break;
-      }
+      this.sanitizer.bypassSecurityTrustUrl(element.image);
     });
   }
 

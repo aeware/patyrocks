@@ -19,75 +19,17 @@
 <ion-content>
   <form [formGroup]="frmCalculateServices" (ngSubmit)="openCheckout()">
     <ion-grid>
-      <ion-row>
+        <!-- <ion-badge *ngFor="let flag of myevent.flags" class="{{flag.tag}}">{{flag.name}}</ion-badge> -->
+      <ion-row *ngFor="let item of event.items">
         <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_burguer.jpg')">
-            <div class="titulo" (click)="openBurguer()">Burguer <ion-icon name="information-circle"></ion-icon></div>
+          <ion-card full [style.backgroundImage]="'url(' + item.image + ')'" >
+            <div class="titulo" (click)="openModal(item)">{{item.name}} <ion-icon name="information-circle"></ion-icon></div>
             <div class="less_plus">
-                <ion-checkbox formControlName="qtdBurguer" (ionChange)="setQtd()" [(ngModel)]="event.qtdBurguer"></ion-checkbox>
+                <ion-checkbox (ionChange)="setQtd(item.tag)" [formControlName]="item.tag" [(ngModel)]="item.qty"></ion-checkbox>
             </div>
           </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_pizza.jpg')">
-            <div class="titulo" (click)="openPizza()">Pizza <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-                <ion-checkbox formControlName="qtdPizza" (ionChange)="setQtd()" [(ngModel)]="event.qtdPizza"></ion-checkbox>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_crepe.jpg')">
-            <div class="titulo" (click)="openCrepe()">Crepe <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-                <ion-checkbox formControlName="qtdCrepe" (ionChange)="setQtd()" [(ngModel)]="event.qtdCrepe"></ion-checkbox>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_aer.jpg')">
-            <div class="titulo" (click)="openAeR()">Água/Refrigerante <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-                <ion-checkbox formControlName="qtdAgua" (ionChange)="setQtd()" [(ngModel)]="event.qtdAgua"></ion-checkbox>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_cerveja.jpg')">
-            <div class="titulo" (click)="openCerveja()">Cerveja <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-                <ion-checkbox formControlName="qtdCerveja" (ionChange)="setQtd()" [(ngModel)]="event.qtdCerveja"></ion-checkbox>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <ion-card full style="background-image:url('assets/imgs/btn_gin.jpg')">
-            <div class="titulo" (click)="openGin()">Gin Tônica <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-                <ion-checkbox formControlName="qtdGin" (ionChange)="setQtd()" [(ngModel)]="event.qtdGin"></ion-checkbox>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-12>
-          <p text-center>*Duração de até 4 horas conforme descrição nos buffets.</p>
-        </ion-col>
-      </ion-row>
-
-
-
-      
     </ion-grid>
     <ion-input type="hidden" class="txt-attendees" placeholder="0" formControlName="attendees" [(ngModel)]="event.attendees" ></ion-input>
   </form>
@@ -107,7 +49,7 @@
       <ion-row>
           <ion-col col-6 class="borderToFooter">
             <div class="btnTotalNew">
-                <ion-icon class="icoCart" name="cart"></ion-icon><p class="totais">Valor Total:<br/> {{event.valorTotal | currency:"R$ ":0}}</p>
+                <ion-icon class="icoCart" name="cart"></ion-icon><p class="totais">Valor Total:<br/> {{event.valueTotal | currency:"R$ ":0}}</p>
             </div>
           </ion-col>
           <ion-col col-6 class="borderToFooter">

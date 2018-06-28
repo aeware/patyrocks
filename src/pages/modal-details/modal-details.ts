@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { IonicPage, ViewController, NavController, NavParams, LoadingController, Loading, Modal, ModalController, ModalOptions, Events } from 'ionic-angular';
 
-import { Event } from "../../models/event/event.interface";
+import { Event } from "../../models/event/event";
+import { Shopping } from "../../models/shopping/shopping";
+import { Account } from "../../models/account/account";
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
@@ -21,17 +23,14 @@ import { ToastController } from 'ionic-angular/components/toast/toast-controller
 })
 export class ModalDetailsPage {
 
-  public serviceTypes: any;
   loading: Loading;
+  public eventTypes: any;
+  public msg: string;
   public frmDetalhes : FormGroup;
-  public userDetails: any;  
   responseData : any;
   eventDetails : any;
-  event = {} as Event;
-  public attendee_read : boolean;
 
-
-  constructor(public events: Events, private view: ViewController, public authServices: AuthServicesProvider, private loadingCtrl: LoadingController, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, public toast: ToastController, public params: NavParams) {
+  constructor(public events: Events, public event: Event, public account: Account, public shopp: Shopping, private view: ViewController, public authServices: AuthServicesProvider, private loadingCtrl: LoadingController, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, public toast: ToastController, public params: NavParams) {
     this.frmDetalhes = this.formBuilder.group({
       complement: ['', Validators.required], 
       location: ['', Validators.required],
@@ -39,6 +38,8 @@ export class ModalDetailsPage {
       attendees: ['', Validators.required],
       timeStarts: ['', Validators.required],
       dateStart: ['', Validators.required],
+      duration: ['', Validators.required],
+      auid: [''],
       number: [''],
       street: [''],
       neighborhood: [''],
@@ -49,7 +50,8 @@ export class ModalDetailsPage {
       lng: [''],
       zipcode: ['']
     });
-
+    if(this.shopp.shopping_uid == "N")
+      this.navCtrl.setRoot('HomePage');
 
     this.loading = this.loadingCtrl.create({
       spinner: 'show',
@@ -57,29 +59,28 @@ export class ModalDetailsPage {
     });
     this.loading.present();
 
-    this.event = params.get('data');
-    this.attendee_read = params.get('attendees');
-
-    this.authServices.getData("service_types").then((result) => {
+    this.authServices.getData("event_types").then((result) => {
       localStorage.set
       this.responseData = result;
       
       if(this.responseData.success){
-        this.serviceTypes = this.responseData.types;
+        this.eventTypes = this.responseData.types;
+
+        this.authServices.postData({},"message/services").then((result) => {
+          localStorage.set
+          this.responseData = result;
+          
+          this.msg = this.responseData.msg;
+          this.loading.dismiss();
+          
+        }, (err) => {
+          this.loading.dismiss();
+    
+        });
       }
-      this.loading.dismiss();
     }, (err) => {
       this.loading.dismiss();
-
     });
-
-  }
-
-  attendees_read(){
-    if(!this.attendee_read)
-      return true;
-    else
-      return false;
   }
 
   finalizar() {
@@ -98,13 +99,7 @@ export class ModalDetailsPage {
       if(varDate <= today){
         this.alertHour();
       }else{
-  
-        if(this.userDetails){
-          this.event.uuid = this.userDetails.uuid; 
-        }
-        this.event.return = false;
-        this.view.dismiss(this.event);
-        
+        this.events.publish('shopping:checkout', this.event);
       }
     }else{
       if(varDate <= today){
@@ -113,7 +108,9 @@ export class ModalDetailsPage {
         this.presentToast('Selecione a data.');
       }else if (!this.frmDetalhes.controls.timeStarts.valid) {
         this.presentToast('Selecione a hora.');
-      }else if (!this.frmDetalhes.controls.attendees.valid) {
+      }else if (!this.frmDetalhes.controls.duration.valid) {
+        this.presentToast('Selecione a duração.');
+      }else if (!this.frmDetalhes.controls.attendees.valid && this.event.attendees > 0) {
         this.presentToast('Digite número de participantes.');
       }else if (!this.frmDetalhes.controls.type.valid) {
         this.presentToast('Selecione o tipo do evento.');
@@ -165,11 +162,6 @@ export class ModalDetailsPage {
 
   faleCom(){
     this.events.publish('alerts:contactUs');
-  }
-
-  closeModal() {
-    this.event.return = true;
-    this.view.dismiss(this.event);
   }
 
 }

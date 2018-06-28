@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading, Events } from 'ionic-angular';
 
 // import { PaymentOkPage } from "../payment-ok/payment-ok";
-import { Event } from "../../models/event/event.interface";
+import { Shopping } from "../../models/shopping/shopping";
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 /**
@@ -31,23 +31,14 @@ export class PaymentPage {
     euid: ''
   } 
   public msg: string;
-  event = {} as Event;
 
-  constructor(public events: Events, public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController ) {
+  constructor(public shopp: Shopping, public events: Events, public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController ) {
 
     this.loading = this.loadingCtrl.create({
       spinner: 'show',
       content: 'Carregando...'
     });
-    this.loading.present(); 
-
-    if(!localStorage.getItem('empenho')){
-      this.navCtrl.setRoot('HomePage');
-    }
-    
-    this.event = JSON.parse(localStorage.getItem('empenho'));
-
-    this.card.euid = this.event.uid;
+    this.loading.present();
 
     this.authServices.postData({},"message/pay").then((result) => {
       localStorage.set
@@ -68,42 +59,14 @@ export class PaymentPage {
       alert.present();
     });
   }
+
+  goBack(){
+    this.navCtrl.setRoot('MyeventsPage');
+  }
  
 
   pay(){
-    this.loading = this.loadingCtrl.create({
-      spinner: 'show',
-      content: 'Carregando...'
-    });
-    this.loading.present();
-    
-    this.authServices.postData(this.card, "payments/pay").then((result) => {
-      localStorage.set
-      this.responseData = result;
-      
-      if(this.responseData.success){
-        this.loading.dismiss();
-        this.navCtrl.setRoot('PaymentOkPage');
-      }else{
-        this.loading.dismiss();
-        let alert = this.alertCtrl.create({
-          title: 'Paty Rocks',
-          subTitle: this.responseData.status,
-          buttons: ['OK']
-        });
-        alert.present();
-      }
-    }, (err) => {
-      this.loading.dismiss();
-      var retorno = JSON.parse(err._body);
-
-      let alert = this.alertCtrl.create({
-        title: 'Paty Rocks',
-        subTitle: retorno.status,
-        buttons: ['OK']
-      });
-      alert.present();
-    });
+    this.events.publish('shopping:pay', this.card);
   }
 
   faleCom(){

@@ -1,34 +1,24 @@
-<!--
-  Generated template for the CalculatePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle float-left>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title float-left>Selecione a equipe</ion-title>
-      <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
-        <img src="assets/imgs/logo.png" style="height: 44px;"/>
-      </button>
-    </ion-navbar>
+  <button ion-button (click)="closeModal()" color="light" class="head_btn_voltar"><ion-icon name="arrow-back"></ion-icon>voltar</button>
+  <div class="head_title"><img src="assets/imgs/title.png"/></div>
+  <button class="head_cart" ion-button float-right color="light" (click)="shopping_cart()">
+      <ion-icon name="cart"></ion-icon><ion-badge *ngIf="shopp.items_total > 0" item-end>{{shopp.items_total}}</ion-badge>
+  </button>
 </ion-header>
 
 <ion-content>
   <form [formGroup]="frmCalculate" (ngSubmit)="openCheckout()">
     <ion-grid>
       <ion-row *ngFor="let item of event.items">
-        <ion-col col-12>
+        <ion-col col-12 class="layout_1">
           <ion-card full [style.backgroundImage]="'url(' + item.image + ')'" >
-            <div class="titulo" (click)="openModal(item)">{{item.name}} <ion-icon name="information-circle"></ion-icon></div>
-            <div class="less_plus">
-                <button class="btnMenos" type="button" ion-button (click)="setQtd(item.tag, 'less')"><ion-icon name="remove"></ion-icon></button>
-                <p class="qtd">{{item.qty}}</p>
-                <button class="btnMais" type="button" ion-button (click)="setQtd(item.tag, 'plus')"><ion-icon name="add"></ion-icon></button>
-              </div>
           </ion-card>
+          <div class="titulo" (click)="openModal(item)">{{item.name}} <ion-icon name="information-circle"></ion-icon></div>
+          <div class="less_plus">
+            <button class="btnMenos" type="button" ion-button (click)="setQtd(item.tag, 'less')"><ion-icon name="remove"></ion-icon></button>
+            <p class="qtd">{{item.qty}}</p>
+            <button class="btnMais" type="button" ion-button (click)="setQtd(item.tag, 'plus')"><ion-icon name="add"></ion-icon></button>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -41,20 +31,44 @@
     <ion-grid>
       <ion-row class="row-scroll">
         <ion-col col-12 class="borderToFooter">
-            <h5>Duração(horas)<ion-input type="text" class="txt-duration" placeholder="0" [(ngModel)]="event.duration" ></ion-input></h5>
-            <ion-item>
+          <span class="duracao_radio">Período de trabalho:</span>
+            <ion-list radio-group [(ngModel)]="event.duration" (ionChange)="setQtd(null, 'duration')">
+                <ion-item>
+                  <ion-label>4 horas</ion-label>
+                  <ion-radio value="4"></ion-radio>
+                </ion-item>
+              
+                <ion-item>
+                  <ion-label>6 horas</ion-label>
+                  <ion-radio value="6"></ion-radio>
+                </ion-item>
+              
+                <ion-item>
+                  <ion-label>8 horas</ion-label>
+                  <ion-radio value="8"></ion-radio>
+                </ion-item>
+              
+              </ion-list>
+            <!-- <div class="arraste" *ngIf="show_scroll_alert" (click)="closeAlert()">
+              Arraste!
+              <span></span>
+            </div>
+            <div class="num_range" (click)="showAlert()">
+                Período (horas)<br/><span>{{event.duration}}</span>
+            </div>
+            <ion-item class="num_range_attendees">
               <ion-range min="4" max="8" step="2" snaps="true" color="default" (ionChange)="setQtd(null, 'duration')" [(ngModel)]="event.duration"></ion-range>
-            </ion-item>
+            </ion-item> -->
         </ion-col>
       </ion-row>
       <ion-row>
           <ion-col col-6 class="borderToFooter">
             <div class="btnTotalNew">
-                <ion-icon class="icoCart" name="cart"></ion-icon><p class="totais">Valor Total:<br/> {{event.valueTotal | currency:"R$ ":0}}</p>
+                <ion-icon class="icoCart" name="cart"></ion-icon><p class="totais">Valor:<br/><span>{{subTotal | currency:"R$ ":0}}</span></p>
             </div>
           </ion-col>
           <ion-col col-6 class="borderToFooter">
-              <button class="btnEventoNew" (click)="openCheckout()" type="submit" ion-button>Solicitar<br/>Orçamento</button>
+              <button class="btnEventoNew" (click)="openCheckout()" type="submit" ion-button>Adicionar<br/>ao carrinho</button>
           </ion-col>
       </ion-row>
     </ion-grid>

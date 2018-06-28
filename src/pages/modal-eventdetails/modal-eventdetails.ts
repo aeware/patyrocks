@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { Modal, ModalController, NavController, ModalOptions, IonicPage, ViewController, NavParams, AlertController, Events } from 'ionic-angular';
+import { Modal, ModalController, NavController, ModalOptions, IonicPage, ViewController, NavParams, Events } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
 // import { ModalConsiderationsPage } from "../modal-considerations/modal-considerations";
 // import { MyeventsPage } from '../myevents/myevents';
-
-import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 /**
  * Generated class for the ModalEventdetailsPage page.
  *
@@ -20,38 +18,14 @@ import { AuthServicesProvider } from '../../providers/auth-services/auth-service
 })
 export class ModalEventdetailsPage {
 
-  public responseData:any;
   public myservices: any;
-  public myevent={
-    attendees:'',
-    canceled:false,
-    canceled_at:'',
-    created_at:'',
-    dateStart:'',
-    duration:'',
-    euid:'',
-    location_complete:'',
-    location_tiny:'',
-    services:Array,
-    type:'',
-    typename:'',
-    updated_at:'',
-    is_time: false,
-    staffs: Array
-  };
-  public myeventQty = {
-    qtdBartender: 0,
-    qtdChurrasqueiro: 0,
-    qtdRecepcionista: 0,
-    qtdGarcom: 0,
-    qtdAjudante: 0
-  };
+  public myevent: any;
   
-  constructor(public events: Events, public sanitizer : DomSanitizer, public navCtrl: NavController, private alertCtrl: AlertController, private authServices: AuthServicesProvider, private view: ViewController, private modal: ModalController, public params: NavParams) {
+  constructor(public events: Events, public sanitizer : DomSanitizer, public navCtrl: NavController, private view: ViewController, private modal: ModalController, public params: NavParams) {
     this.myevent = params.get('data');
-    this.myservices = this.myevent.services;
+    this.myservices = this.myevent.items;
     this.myservices.forEach(element => {
-      this.sanitizer.bypassSecurityTrustUrl(element.image);
+      this.sanitizer.bypassSecurityTrustUrl(element.image_description);
     });
   }
 
@@ -70,43 +44,12 @@ export class ModalEventdetailsPage {
 
   }
 
-  cancelarEvento(){
-    this.authServices.postData({}, "event/"+this.myevent.euid+"/cancel").then((result) => {
-      localStorage.set
-      this.responseData = result;
-      if(this.responseData.success){
-        let alert = this.alertCtrl.create({
-          title: 'Paty Rocks',
-          subTitle: 'Evento cancelado com sucesso!',
-          buttons: [
-            {
-              text: 'OK',
-              handler: () => {
-                  this.navCtrl.push('MyeventsPage');
-              }
-            }
-          ]
-        });
-        alert.present();
-      }
-    }, (err) => {
-      var retorno = JSON.parse(err._body);
+  cancelarEvento(shopping_uid){
+    this.events.publish('shopping:cancel', shopping_uid, this.view);
+  }
 
-      let alert = this.alertCtrl.create({
-        title: 'Paty Rocks',
-        subTitle: retorno.status,
-        buttons: [
-          {
-            text: 'OK',
-            handler: () => {
-                this.navCtrl.push('MyeventsPage');
-            }
-          }
-        ]
-      });
-      alert.present();
-    });
-
+  load_shopp(shopping_uid){
+    this.events.publish('shopping:load_shopp', shopping_uid, this.view);
   }
 
   faleCom(){

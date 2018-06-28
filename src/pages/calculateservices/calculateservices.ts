@@ -3,7 +3,8 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { IonicPage, NavController, NavParams, LoadingController, Loading, Modal, ModalController, ModalOptions, Events } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Event, params } from "../../models/event/event.interface";
+import { Event, Item } from "../../models/event/event";
+import { Shopping } from "../../models/shopping/shopping";
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
@@ -19,31 +20,29 @@ import { AuthServicesProvider } from '../../providers/auth-services/auth-service
   selector: 'page-calculateservices',
   templateUrl: 'calculateservices.html',
 })
-export class CalculateservicesPage {
+export class CalculateServicesPage {
 
   loading: Loading;
-  public account : any;
-  public frmCalculateServices : FormGroup;
+  public ser_type = 'com';
   responseData : any;
-  event = {} as Event;
-
-  constructor(public events: Events, public sanitizer : DomSanitizer, private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController) {
+  public show_scroll_alert: boolean;
+  public frmCalculateServices : FormGroup;
+  public subTotal = 0.0;
+  
+  constructor(public shopp: Shopping, public event: Event, public events: Events,public sanitizer : DomSanitizer, private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController) {
     this.frmCalculateServices = this.formBuilder.group({
       attendees: ['', Validators.required]
     });
-
-    this.event.valueTotal = 0;
-    this.event.attendees = 0;
-
-    if(localStorage.getItem("account")){
-      this.account = JSON.parse(localStorage.getItem('account'));
-    }
+    this.show_scroll_alert = false;
+    this.event.attendees = 40;
 
     this.atualizaCalculos();
-    
   }
  
   atualizaCalculos(){
+    this.event.items = [];
+    this.subTotal = 0.0;
+
     this.loading = this.loadingCtrl.create({
      spinner: 'show',
      content: 'Carregando...'
@@ -55,32 +54,47 @@ export class CalculateservicesPage {
       this.responseData = result;
 
       if(this.responseData.success){
-        this.event.items = [];
+        let y = 0;
         this.responseData.matrix.forEach(element => {
-          let a: params = {
-            product_id : element['product_id'],
-            name : element['name'],
-            title_pop : 'Serviço de '+element['name'],
-            tag : element['tag'],
-            image : element['image'],
-            description : element['description'],
-            vector : element,
-            qty: 0,
-            value: 0,
-            total: 0
-          };
-          //if(element['image']){
+          if(element['product_id']){
+            let a: Item = {
+              product_id : element['product_id'],
+              name : element['name'],
+              title_pop : 'Serviço de '+element['name'],
+              tag : element['tag'],
+              type : 'serv',
+              image : element['image'],
+              image_description : element['image_description'],
+              description : element['description'],
+              vector : element,
+              qty: 0,
+              duration: 0,
+              attendees: 0,
+              value: 0,
+              total: 0
+            };
+            
             this.sanitizer.bypassSecurityTrustUrl(a.image);
-          //}
-
-          this.event.items.push(a);          
-        });
-        
-        this.event.items.forEach(item => {
-          this.frmCalculateServices.addControl(item.tag, new FormControl(true));
-        });
-        
-        this.loading.dismiss();
+            if(this.ser_type == "com"){
+              if(!a.name.startsWith('Bar'))
+                this.event.items.push(a);
+            }else{
+              if(a.name.startsWith('Bar'))
+                this.event.items.push(a);
+            }    
+            y++; 
+          }
+        }); 
+        if(y == 0){
+          this.loading.dismiss();
+          this.events.publish('alerts:otherChannels');
+        }else{
+          this.event.items.forEach(item => {
+            this.frmCalculateServices.addControl(item.tag, new FormControl(true));
+          });
+          
+          this.loading.dismiss();
+        }
       }else{
         this.loading.dismiss();
       }
@@ -116,83 +130,37 @@ export class CalculateservicesPage {
     })[0];
   }
 
+  showAlert(){
+    this.show_scroll_alert = true;
+  }
+
   setQtd(product_id){
-    this.event.valueTotal = 0;
+    this.closeAlert();
+    this.subTotal = 0.0;
     if(this.event.attendees != 0){
-    
       this.event.items.forEach(b => {
         if(b.qty || b.qty == 1)
         {
-          this.event.valueTotal += parseInt(b.vector['a'+this.event.attendees]);
+          this.subTotal += parseInt(b.vector['a'+this.event.attendees]);
           b.total = parseInt(b.vector['a'+this.event.attendees]);
           b.value = parseInt(b.vector['a'+this.event.attendees]);
+          b.attendees = this.event.attendees;
         }
         else{
           b.value = b.total = 0;
         }
       });
     }
-    
+      
   }
 
-  openCheckout(){
-    if(this.validaTela())
-      this.editarLocal();
+  setItems(){
+    console.log(this.ser_type);
+    this.atualizaCalculos();
   }
 
-  editarLocal(){
-    const myModalOptions: ModalOptions = {
-      enableBackdropDismiss: false
-    };
-
-    const myModal: Modal = this.modal.create('ModalDetailsPage', { data : this.event, attendees: false}, myModalOptions);
-      myModal.onDidDismiss(data => {
-      if(!data.return){
-        this.checkout();
-      }else{
-        this.events.publish('alerts:toast','Confirme os detalhes na tela anterior para continuar.');
-      }
-    });
-    myModal.present();
-  }
-
-  checkout(){
-    this.loading = this.loadingCtrl.create({
-      spinner: 'show',
-      content: 'Carregando...'
-    });
-    this.loading.present();
-
-    localStorage.setItem("empenho", JSON.stringify(this.event));
-
-    if(!localStorage.getItem('empenho')){ 
-      this.navCtrl.setRoot('HomePage');
-    }
-    
-    if(localStorage.getItem("account")){
-      this.account = JSON.parse(localStorage.getItem('account'));
-      this.event.uuid = this.account.uuid;
-    }
-    
-    this.authServices.postData(this.event, "event").then((result) => {
-      localStorage.set
-      this.responseData = result;
-
-      this.event.uid = this.responseData.event.euid;
-
-      localStorage.setItem("empenho", JSON.stringify(this.event));
-
-      this.loading.dismiss();
-
-      if(!localStorage.getItem("account")){
-        this.navCtrl.setRoot('SigninPage');  
-      }else{
-        this.navCtrl.setRoot('PaymentPage');
-      }
-    }, (err) => {
-      this.loading.dismiss();
-      this.events.publish('alerts:toast','Houve um erro na solicitação. Tente novamente.');
-    });
+  closeAlert(){
+    this.show_scroll_alert = false;
   }
 
   openModal(data){
@@ -205,8 +173,28 @@ export class CalculateservicesPage {
     myModal.present();
   }
 
-  faleCom(){
-    this.events.publish('alerts:contactUs');
+  closeModal() {
+    this.navCtrl.setRoot('HomePage');
+  }
+
+  shopping_cart(){
+    this.events.publish('shopping:cart');
+  }
+
+  openCheckout(){
+    if(this.validaTela()){
+      this.events.publish('shopping:add', this.filterAdd(this.event.items));
+    }
+  }
+
+  filterAdd(array){
+    var a = [];
+    array.filter(function (chain) {
+      if(chain.qty > 0 || chain.qty == true){
+        a.push(chain);
+      }
+    });
+    return a;
   }
 
 }

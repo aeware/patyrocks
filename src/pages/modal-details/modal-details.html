@@ -1,19 +1,11 @@
-<!--
-  Generated template for the ModalDetailsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-  <ion-navbar>
-      <button ion-button (click)="closeModal()" color="light" class="btnVoltar" float-left><ion-icon name="arrow-back"></ion-icon></button>
-    <ion-title>Detalhes do Evento</ion-title>
-    <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
-      <img src="assets/imgs/logo.png" style="height: 44px;"/>
-    </button>
-  </ion-navbar>
+  <ion-navbar class="head_btn_voltar"></ion-navbar>
+  <div class="head_title"><img src="assets/imgs/title.png"/></div>
+  <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
+    <img src="assets/imgs/logo.png" style="height: 44px;"/>
+  </button>
 </ion-header>
-
+ 
 <ion-content>
   <form [formGroup]="frmDetalhes" (ngSubmit)="finalizar()">
     <div padding>
@@ -30,22 +22,30 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-12>
-            <ion-icon class="icoEmpenho" name="time"></ion-icon>
-            <ion-datetime doneText="Ok" cancelText="Cancelar" class="labels" placeholder="Hora de Início" min="00:00" max="24:00" minuteValues="0,30" displayFormat="HH:mm" pickerFormat="HH mm" formControlName="timeStarts" [(ngModel)]="event.timeStarts"></ion-datetime>
-          </ion-col>
+            <ion-col col-6>
+              <ion-icon class="icoEmpenho" name="time"></ion-icon>
+              <ion-datetime doneText="Ok" cancelText="Cancelar" class="inputs" placeholder="Hora de Início" min="00:00" max="24:00" minuteValues="0,30" displayFormat="HH:mm" pickerFormat="HH mm" formControlName="timeStarts" [(ngModel)]="event.timeStarts"></ion-datetime>
+            </ion-col>
+            <ion-col col-6>
+              <ion-icon class="icoEmpenho" name="timer"></ion-icon>
+              <ion-select cancelText="Cancelar" class="inputs" interface="action-sheet" placeholder="Duração" formControlName="duration" [(ngModel)]="event.duration">
+                <ion-option value="4">4 horas</ion-option>
+                <ion-option value="6">6 horas</ion-option>
+                <ion-option value="8">8 horas</ion-option>
+              </ion-select>
+            </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-12>
             <ion-icon class="icoEmpenho" name="person"></ion-icon>
-            <ion-input type="number" class="labels" placeholder="Número de Participantes" [readonly]="attendees_read()" formControlName="attendees" [(ngModel)]="event.attendees" ></ion-input>
+            <ion-input type="number" class="labels" placeholder="Número de Participantes" formControlName="attendees" [(ngModel)]="event.attendees" ></ion-input>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-12>
             <ion-icon class="icoEmpenho" name="wine"></ion-icon>
             <ion-select okText="Ok" cancelText="Cancelar" class="labels" interface="action-sheet" placeholder="Tipo de Evento" formControlName="type" [(ngModel)]="event.type">
-              <ion-option *ngFor="let service of serviceTypes" [value]="service.id">{{service.name}}</ion-option>
+              <ion-option *ngFor="let eventType of eventTypes" [value]="eventType.id">{{eventType.name}}</ion-option>
             </ion-select>
           </ion-col>
         </ion-row>
@@ -53,7 +53,8 @@
           <ion-col class="clickLocation" col-12>
             <ion-icon class="icoEmpenho" name="pin"></ion-icon>
             <ion-input type="text" class="labels" (ionFocus)="openLocation()" placeholder="Localização" formControlName="location" [(ngModel)]="event.location" ></ion-input>
-            
+
+            <ion-input type="hidden" formControlName="auid" [(ngModel)]="event.auid" ></ion-input>
             <ion-input type="hidden" formControlName="number" [(ngModel)]="event.number" ></ion-input>
             <ion-input type="hidden" formControlName="complement" [(ngModel)]="event.complement" ></ion-input>
             <ion-input type="hidden" formControlName="street" [(ngModel)]="event.street" ></ion-input>
@@ -74,7 +75,7 @@
         </ion-row>
         <ion-row>
           <ion-col col-12>
-            <p text-center>*Todos os serviços chegarão entre 1 e 2 horas antes do horário informado, para preparação.</p>
+            <p text-center [innerHTML]="msg"></p>
           </ion-col>
         </ion-row>
       </ion-grid>

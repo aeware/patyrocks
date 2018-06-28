@@ -20,6 +20,10 @@ import { Facebook } from '@ionic-native/facebook';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { SocialService } from '../providers/social-services/social-services';
 
+import { Shopping } from '../models/shopping/shopping';
+import { Account } from '../models/account/account';
+import { Event } from '../models/event/event';
+
 @NgModule({
   declarations: [
     MyApp
@@ -50,7 +54,10 @@ import { SocialService } from '../providers/social-services/social-services';
     Facebook,
     SocialService,
     AuthServicesProvider,
-    AngularFireAuth
+    AngularFireAuth,
+    Shopping,
+    Account,
+    Event
   ],
   schemas:[
     Ionic2RatingModule

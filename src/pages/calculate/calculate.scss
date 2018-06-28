@@ -37,82 +37,6 @@ page-calculate{
     // .icoEmpenho.icon-ios{
     //     top:20px;
     // }
-    .card{
-        width: 100%;
-        height: 70px;
-        float: left;
-        border-radius: 0px;
-        background-size: cover;
-        background-position: center;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        margin: 0 0 3px 0;
-        position: relative;
-        // border-bottom:1px solid rgb(233,240,247);
-    }
-    .titulo{
-        position: absolute;
-        left: 0;
-        z-index: 1000;
-        width: 100%;
-        height: 70px;
-        line-height: 70px;
-        text-align: left;
-        font-size: 18px;
-        // font-weight: bold;
-        color: #fff;
-        padding-left: 10px;
-        vertical-align: bottom;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: 1000;
-    }
-    .less_plus{
-        text-align: center;
-        position: absolute;
-        right: 0px;
-        height: 70px;
-        padding-top: 18px;
-        z-index: 2000;
-        width: 110px;
-    }
-    
-    .btnMenos, .btnMais{
-        float: left;
-        width: 25px;
-        height: 25px;
-        border-radius: 13px;
-        text-align: center;
-        line-height: 25px;
-        font-size: 16px;
-        padding: 0px;
-    }
-    .btnMenos:hover, .btnMais:hover{
-        background-color:#2e9888;
-    }
-    .btnMenos{
-        background-color:rgb(255,255,255);
-        color: rgb(89,97,118);
-        box-shadow: 0px 3px 3px 3px rgba(223,233,239,0.3);
-    }
-    .btnMais{
-        background-color:rgb(35,214,186);
-        color: rgb(255,255,255);
-        box-shadow: 0px 3px 3px 3px rgba(35,214,186,0.3);
-    }
-    .qtd{
-        text-align: center;
-        font-size: 12pt;
-        color: #FFF;
-        line-height: 25px;
-        float: left;
-        margin: 0;
-        margin-top: 5px;
-        width: 30px;
-    }
-    .qtd .text-input{
-        text-align: center;
-        margin: 0;
-    }
     .colunaResumo{
         border:0px!important;
         height: 30px;
@@ -123,12 +47,6 @@ page-calculate{
     }
     .asterisco{
         font-size:8pt;
-    }
-
-    h5{
-        margin:20px 0 0;
-        color: #596176;
-        text-align: center;
     }
     .txt-attendees{
         display: inline-block;
@@ -167,10 +85,10 @@ page-calculate{
     }
 
     #footer {
-        height: 115px;
+        height: 135px;
     }
     .row-scroll {
-        height: 50px;
+        height: 70px;
         width: 100%;
         padding: 0 !important;
         background-color: #fff;
@@ -182,18 +100,8 @@ page-calculate{
         height: 105px;
         width: 100%;
     }
-    ion-item{
-        padding: 0px!important;
-        margin: 0px!important;
-        float: left!important;
-        width: calc(100% - 150px)!important;
-        margin-left:30px!important;
-    }
-    ion-range{
-        height: 48px!important;
-    }
-    h5 {
-        margin: 0px 0 0;
+    ion-content h5 {
+        margin: 20px 0 0 0;
         color: #596176;
         text-align: center;
         font-size: 7pt;
@@ -225,6 +133,31 @@ page-calculate{
     .item-ios.item-block .item-inner{
         border:0px;
     }
+
+    .borderToFooter ion-list{
+        margin:0px!important;
+        text-align:center;
+    }
+
+    .borderToFooter ion-list ion-item{
+        width:32%;
+        display: inline-block;
+        vertical-align: middle;
+        height: 40px;
+        min-height: 40px;
+        border: 0px!important;
+        font-size: 10px;
+    }
+
+    .borderToFooter span.duracao_radio{
+        width: 100%;
+        text-align: left;
+        display: block;
+        font-size: 16px;
+        padding: 4px 0 0 4px;
+    }
+
+    
 } 
 
 

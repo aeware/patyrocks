@@ -3,7 +3,7 @@ import { Modal, ModalController, ModalOptions, IonicPage, NavController, NavPara
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
-import { Account } from "../../models/account/account.interface";
+import { Account } from "../../models/account/account";
 /**
  * Generated class for the StaffeventsPage page.
  *
@@ -20,15 +20,13 @@ export class StaffeventsPage {
 
   loading: Loading;
 
-  account = {} as Account;
-
 
   public dia = this.tratamentoDia();
   public userDetails: any;
   public myevents: any;
   responseData: any;
 
-  constructor(public events: Events, private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public events: Events, public account: Account, private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl: NavController, public navParams: NavParams) {
     this.carregaTela();
   }
 

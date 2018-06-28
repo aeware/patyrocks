@@ -1,0 +1,30 @@
+page-cart {
+    .scroll-content{
+        padding:0px 0 50px 0!important;
+    }
+    ion-card{
+        height: 80px;
+        padding: 20px;
+    }
+    .description{width:69%;float:left;color: #596176;font-size:9px;}
+    .title{color:#f86d68;font-size:14px;overflow:hidden;}
+    .btnRemover{
+        width:30%;
+        float:right;
+        background: #f86d68;
+        background: -moz-linear-gradient(left, #f86d68 0%, #fa6279 50%, #fa6279 51%, #fe5493 100%);
+        background: -webkit-linear-gradient(left, #f86d68 0%,#fa6279 50%,#fa6279 51%,#fe5493 100%);
+        background: linear-gradient(to right, #f86d68 0%,#fa6279 50%,#fa6279 51%,#fe5493 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f86d68', endColorstr='#fe5493',GradientType=1 );
+        border-radius:15px;
+        // background: url('/assets/imgs/fundoBotaoApp.png') repeat-y;
+        background-size: 100%;
+        height:30px;
+        -webkit-box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
+        margin: 0px auto 0px;
+        color:#fff;
+        font-size: 12px;
+      }
+}

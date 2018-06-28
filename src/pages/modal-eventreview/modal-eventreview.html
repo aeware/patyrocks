@@ -1,38 +1,34 @@
-<!--
-  Generated template for the ModalEventreviewPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-    <ion-navbar>
-        <button ion-button (click)="closeModal()" color="light" class="btnVoltar" float-left><ion-icon name="arrow-back"></ion-icon></button>
-        <ion-title float-left>Avaliação do Evento</ion-title>
-        <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
-          <img src="assets/imgs/logo.png" style="height: 44px;"/>
-        </button>
-    </ion-navbar>
+    <button ion-button (click)="closeModal()" color="light" class="head_btn_voltar"><ion-icon name="arrow-back"></ion-icon>voltar</button>
+    <div class="head_title"><img src="assets/imgs/title.png"/></div>
+    <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
+        <img src="assets/imgs/logo.png" style="height: 44px;"/>
+    </button>
 </ion-header>
 <ion-content>
     <h4 text-center>Avalie</h4>
     <ion-list>
-        <ion-item *ngFor="let staff of mystaffs">
-            <ion-avatar>
-                <img src="{{staff.user.image}}">
-            </ion-avatar>
-            <div class="dados">
-                <h2 class="titulo">{{staff.user.firstname}} {{staff.user.lastname}}</h2>
-                <p>{{staff.staff_type_name}}</p>
-                <textarea class="inptTxtarea" placeholder="Descrição" [(ngModel)]="staff.description" full ></textarea>
+        <div *ngFor="let item of myevent.items">
+            <div *ngIf="item.associated_queue > 0">
+                <ion-item  *ngFor="let associeted of item.associateds">
+                    <ion-avatar>
+                        <img src="{{associeted.image}}">
+                    </ion-avatar>
+                    <div class="dados">
+                        <h2 class="titulo">{{associeted.firstname}} {{associeted.lastname}}</h2>
+                        <p>{{item.product}}</p>
+                        <textarea class="inptTxtarea" placeholder="Descrição" [(ngModel)]="associeted.rate_description" full></textarea>
+                    </div>
+                    <rating [(ngModel)]="associeted.rate"
+                    readOnly="false"
+                    max="5"
+                    emptyStarIconName="star-outline"
+                    halfStarIconName="star-half"
+                    starIconName="star"
+                    nullable="false" ></rating>
+                </ion-item>
             </div>
-            <rating [(ngModel)]="staff.rate"
-            readOnly="false"
-            max="5"
-            emptyStarIconName="star-outline"
-            halfStarIconName="star-half"
-            starIconName="star"
-            nullable="false" ></rating>
-        </ion-item>
+        </div>
     </ion-list>
     <button class="btnEvento verde" (click)="enviar()" ion-button full float-end>Finalizar</button>
 </ion-content>

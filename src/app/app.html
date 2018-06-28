@@ -1,28 +1,31 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-avatar *ngIf="account.logged" (click)="editUser()" class="imgUser" item-start>
-        <img src="{{account.image}}"/>
-      </ion-avatar>
-      <ion-title class="account-name" *ngIf="account.logged">{{account.name}}</ion-title>
-      <button class="btnEntrar" (click)="doLogin()" *ngIf="!account.logged" color="gray" menuClose ion-button float-end>Login</button>
-      <button class="btnEntrar" (click)="doLogout()" *ngIf="account.logged" color="gray" menuClose ion-button float-end>Logout</button>
+      <div class="avatar">
+        <ion-avatar *ngIf="account.logged" (click)="editUser()">
+          <img src="{{account.image}}"/>
+        </ion-avatar>
+      </div>
+      <div class="clear"></div>
+      <p class="account-name" *ngIf="account.logged">{{account.name}}</p>
+      <button class="btnLogin" (click)="doLogin()" *ngIf="!account.logged" color="gray" menuClose ion-button>Login</button>
+      <button class="btnLogout" (click)="doLogout()" *ngIf="account.logged" color="gray" menuClose ion-button>Logout</button>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list *ngIf="!account.logged">
-      <button menuClose ion-item *ngFor="let p of unlogged" (click)="openPage(p)">
+      <button menuClose class="itemMenu" *ngFor="let p of unlogged" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>
     <ion-list  *ngIf="account.logged && account.isStaff">
-      <button menuClose ion-item *ngFor="let p of staffPages" (click)="openPage(p)">
+      <button menuClose class="itemMenu" *ngFor="let p of staffPages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>
     <ion-list *ngIf="account.logged && !account.isStaff">
-      <button menuClose ion-item *ngFor="let p of userPages" (click)="openPage(p)">
+      <button menuClose class="itemMenu" *ngFor="let p of userPages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>

@@ -6,7 +6,7 @@ import { Modal, ModalController, ModalOptions, IonicPage, NavController, NavPara
 // import { ModalEventreviewPage } from "../modal-eventreview/modal-eventreview";
 
 
-import { Account } from "../../models/account/account.interface";
+import { Account } from "../../models/account/account";
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 /**
@@ -24,29 +24,24 @@ import { AuthServicesProvider } from '../../providers/auth-services/auth-service
 export class MyeventsPage {
 
   loading: Loading;
-  account = {} as Account;
-  public userDetails: any;
   public myevents: any; 
   public myevent: any;
   responseData: any;
 
-  constructor(public events: Events, public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public events: Events, public account: Account, public loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl: NavController, public navParams: NavParams) {
     
     this.loading = this.loadingCtrl.create({
       spinner: 'show',
       content: 'Carregando...'
     });
     this.loading.present();
-    
-    const data = JSON.parse(localStorage.getItem('account'));
-    this.userDetails = data;
 
-    this.authServices.postData({uuid : this.userDetails.uuid}, "events").then((result) => {
+    this.authServices.getData("user/" + this.account.uuid + "/shoppings").then((result) => {
       localStorage.set
       this.responseData = result;
 
       if(this.responseData.success){
-        this.myevents = this.responseData.events;
+        this.myevents = this.responseData.shoppings;
         this.loading.dismiss();
       }
     }, (err) => {
@@ -61,7 +56,7 @@ export class MyeventsPage {
 
     this.myevent = item;
 
-    var date = item.dateStart;
+    var date = item.event_start;
     var varDate = new Date(date);
     var today = new Date();
 
@@ -69,13 +64,14 @@ export class MyeventsPage {
     today.setHours(0,0,0,0);
     
     var page:string;
-    if(varDate > today) {
+    if(varDate >= today) {
       page = 'ModalEventdetailsPage';
     }else if(varDate < today){
       page = 'ModalEventreviewPage';
-    }else {
-      page = 'ModalEventdayPage';
     }
+    // else {
+    //   page = 'ModalEventdayPage';
+    // }
     
     const myModal: Modal = this.modal.create(page, { data: this.myevent }, myModalOptions);
 
@@ -91,12 +87,12 @@ export class MyeventsPage {
       });
       this.loading.present();  
       
-      this.authServices.postData({uuid : this.userDetails.uuid}, "events").then((result) => {
+      this.authServices.getData("user/" + this.account.uuid + "/shoppings").then((result) => {
         localStorage.set
         this.responseData = result;
         
         if(this.responseData.success){
-          this.myevents = this.responseData.events;
+          this.myevents = this.responseData.shoppings;
           this.loading.dismiss();
         }
       }, (err) => {

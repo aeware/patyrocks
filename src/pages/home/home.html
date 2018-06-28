@@ -1,17 +1,58 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle float-left>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title float-left><img src="assets/imgs/title.png" style="width: 70px;"/></ion-title>
-    <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
-      <img src="assets/imgs/logo.png" style="height: 44px;"/>
-    </button>
-  </ion-navbar>
+  <button class="head_btn_menu" ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <div class="head_title"><img src="assets/imgs/title.png"/></div>
+  <button class="head_cart" ion-button float-right color="light" (click)="shopping_cart()">
+      <ion-icon name="cart"></ion-icon><ion-badge *ngIf="shopp.items_total > 0" item-end>{{shopp.items_total}}</ion-badge>
+  </button>
 </ion-header>
 
 <ion-content>
-  <h5 text-center padding>O que você precisa para o seu evento?</h5>
+    <h5 text-center padding>O que você precisa para o seu evento?</h5>
+    <div #row1 class="row">
+      <div #btnCorporate class="home_button" (click)="openCorporate()">
+        <span>Corporate</span>
+      </div>
+      <div #btnBuffet class="home_button" (click)="openBuffets()">
+        <span>Buffets</span>
+      </div>
+    </div>
+    <div #row2 class="row">
+      <div #btnGelo class="home_button" (click)="openProducts()">
+        <span>Gelo<br/>e<br/>Produtos</span>
+      </div>
+      <div #btnDicas class="home_button small" (click)="openDicas()">
+        <span>Dicas<br/>da Paty</span>
+      </div>
+      <div #btnEquipes class="home_button" (click)="openStaffs()">
+        <span>Equipe</span>
+      </div>
+    </div>
+
+    <div #row3 class="row">
+      <div #btnKits class="home_button" (click)="openKits()">
+        <span>Kits<br/>Especiais</span>
+      </div>
+      <div #btnProdutos class="home_button" (click)="faleCom()">
+        <span>Animação<br/>e<br/>Música</span>
+      </div>
+    </div>
+
+
+    <div class="fale_com" (click)="faleCom()">
+      <img src="assets/imgs/icone_chat.png" />
+    </div>
+  </ion-content>
+
+
+
+
+
+
+
+
+  <!-- <h5 text-center padding>O que você precisa para o seu evento?</h5>
   <ion-card class="card" (click)="openBuffets()" style="background-image: url('assets/imgs/btn_buffet.jpg')">
       <div class="card-title"><img src="assets/imgs/txt_btn_buffet.png" style="width: auto;height:116px;margin: 0 auto;"/></div>
       <div class="card-btn">selecionar</div>
@@ -21,5 +62,10 @@
       <div class="card-title"><img src="assets/imgs/txt_btn_equipe.png" style="width: auto;height: 35px;margin: 27px auto;"/></div>
       <div class="card-btn">selecionar</div>
   </ion-card>
-</ion-content>
+  <div style="clear:both;"></div>
+  <ion-card class="card" (click)="openProducts()"  style="background-image: url('assets/imgs/btn_produto.jpg')">
+      <div class="card-title"><img src="assets/imgs/txt_btn_produto.png" style="width: auto;height: 27px;margin: 25px auto;"/></div>
+      <div class="card-btn">selecionar</div>
+  </ion-card>
+</ion-content> -->
   

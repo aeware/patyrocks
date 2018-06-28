@@ -34,7 +34,8 @@ page-signup {
         margin-right:10px;
     }
     
-    .csLink{
+    .csLink, .csLink:hover{
+        background-color: #fff!important;
         color: #33d5ba;
         font-weight: bold;
         display: inline-block;

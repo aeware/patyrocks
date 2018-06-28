@@ -1,69 +1,152 @@
 page-home {
-    h5{
-        margin:15px auto;
-        font-size: 16pt;
-        padding: 5px!important;
-    }
-    .card{
-        width: 98%;
-        height: 200px;
-        margin: 15px auto;
-        border-radius: 5px;
-        background-repeat: no-repeat;
-        background-size: cover;
-        -webkit-box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
-        -moz-box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
-        box-shadow: 4px 3px 10px 0px rgba(0,0,0,0.75);
+    ion-content h5{
+        font-size: 12pt;
+        background-color: #ffffff;
+        margin: 0px 0px 20px 0px;
+        // padding:30px!important;
     }
 
-    .alert-title,.alert-md .alert-sub-title{
+    .row{
+        width:100%;
+        height: 90px;
         text-align: center;
-    }
-    
-    .card .card-title{
-        text-align: center;
-        color:#fff;
-        font-size:26pt;
-        padding-top:20px;
-    }
-    
-    .contentModal {
-        color: rgb(89,97,118);
-    }
-    
-    .contentModal h3{
-        font-size:12pt;
-        font-weight: bold;
-        text-transform:uppercase;
-    }
-    
-    .contentModal ul{
-        padding-left: 20px;
-    }
-    
-    .contentModal li{
-        font-size:12pt;
-    }
-    
-    .contentModal hr{
-        color: rgb(89,97,118);
-        height:1pt;
-    }
-    
-    .contentModal .modelImg{
-        
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .card-btn{
+    .home_button{
+        display: inline-block;
         width: 100px;
-        margin: 0 auto;
-        background-color: #23d6b9;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        border-radius: 15px;
-        margin-top: 10px;
-        color: #fff;
+        height: 100px;
+        border: 5px solid #FFF;
+        border-radius: 50%;
+        vertical-align: middle;
+        position: relative;
+        margin: 0 5px;
+        background-color: #eff0f4;
     }
+
+    .home_button.small{
+        display:inline-block;
+        width: 90px;
+        height: 90px;
+    }
+    .home_button span{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 600;
+        font-size: 15px;
+        color: #f77062;
+    }
+    .home_button.small span{
+        font-weight: 700;
+        font-size: 12px;
+        color: #f77062;
+    }
+
+    .home_button img{
+        height: 60%;
+        width: auto;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    ion-content .scroll-content{
+        // background-color: #f77062;
+        background-size: cover;
+        background-position: center center;
+        background-image: url(../assets/imgs/fundo2.jpg);
+    }
+
+    // ion-content .scroll-content::after{
+    //     content: "";
+    //     background-image: url('../assets/imgs/fundo.jpg');
+    //     opacity: 0.5;
+    //     top: 0;
+    //     left: 0;
+    //     bottom: 0;
+    //     right: 0;
+    //     position: absolute;
+    //     z-index: -1;   
+    //     background-size: cover;
+    //   }
+
+
+      .fale_com{
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+      }
+      .fale_com img{
+        height: auto;
+        width: 70px;
+      }
+
+    // OPCAO 2
+    // h5{
+    //     height: 80px;
+    //     text-align: center;
+    //     font-size: 18px;
+    //     background-color: #ffffff;
+    //     padding-top: 20px !important;
+    //     margin: 0px 0px 50px;
+    // }
+
+    // .row{
+    //     width:100%;
+    //     height: 90px;
+    //     text-align: center;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
+
+    // .home_button{
+    //     display: inline-block;
+    //     width: 100px;
+    //     height: 100px;
+    //     // border: 5px solid #000;
+    //     border-radius: 50%;
+    //     vertical-align: middle;
+    //     position: relative;
+    //     margin: 0 5px;
+    //     background-color: #ffffff;
+    // }
+
+    // .home_button.small{
+    //     display:inline-block;
+    //     width: 90px;
+    //     height: 90px;
+    // }
+    // .home_button span{
+    //     margin: 0;
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    // }
+
+    // .home_button img{
+    //     height: 60%;
+    //     width: auto;
+    //     margin: 0;
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     -webkit-transform: translate(-50%, -50%);
+    //     transform: translate(-50%, -50%);
+    // }
+
+    // ion-content .scroll-content{
+    //     background-color: #f77062;
+    // }
     
 }

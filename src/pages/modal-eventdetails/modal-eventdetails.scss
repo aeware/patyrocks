@@ -7,6 +7,7 @@ page-modal-eventdetails{
         color:rgb(89,97,118);
         font-size:12pt;
         min-height:30px;
+        margin: 3px 0px;
     }
     .text-input-md{
         margin: 4px 0px;
@@ -41,9 +42,13 @@ page-modal-eventdetails{
     .titulo{
         font-size:18px;
         color: rgb(89,97,118);
-        line-height: 40px;
+        margin-top:5px;
+        line-height: 22px;
         float: left;
         margin-left:5px;
+    }
+    .titulo span{
+        font-size:12px;
     }
     .colunaResumo{
         border:0px!important;
@@ -72,8 +77,8 @@ page-modal-eventdetails{
         width: 30px;
         vertical-align: top;
     }
-    .csLink{
-        background-color: #fff;
+    .csLink, .csLink:hover{
+        background-color: #fff!important;
         color: #33d5ba;
         font-weight: bold;
         display: inline-block;
@@ -84,5 +89,24 @@ page-modal-eventdetails{
         height: 40px;
         vertical-align: middle;
     }
-
+    .datetime-md {
+        padding: 0px !important;
+        margin: 3px 0px;
+    }
+    .services ion-avatar, .services h2, .services span{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .services span{
+        font-size: 9px;
+        background-color: rgb(35,214,186);
+        color:#fff;
+        box-shadow: 3px 3px rgba(35,214,186,0.3);
+        margin: 9px!important;
+        height: 20px;
+        line-height: 20px;
+        width: 70px;
+        text-align: center;
+        border-radius: 10px;
+    }
 }

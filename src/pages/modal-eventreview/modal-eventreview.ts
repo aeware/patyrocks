@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, ViewController, NavParams, LoadingController, Loading, Events } from 'ionic-angular';
-
-import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
+import { NavController, IonicPage, ViewController, NavParams, Events } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 
 // import { MyeventsPage } from "../myevents/myevents";
 /**
@@ -18,33 +17,16 @@ import { AuthServicesProvider } from '../../providers/auth-services/auth-service
 })
 export class ModalEventreviewPage {
   
-  loading: Loading;
-  public staff:any;
-  public myevent:any;
-  public responseData:any;
-  public mystaffs:any;
+  public myservices: any;
+  public myevent: any;
 
-  constructor(public events: Events, public loadingCtrl:LoadingController, public navCtrl: NavController, private authServices: AuthServicesProvider, private view: ViewController, public params: NavParams) {
-    this.loading = this.loadingCtrl.create({
-      spinner: 'show',
-      content: 'Carregando...'
-    });
-    this.loading.present();
-
+  constructor(public events: Events, public sanitizer : DomSanitizer, public navCtrl: NavController, private view: ViewController, public params: NavParams) {
     this.myevent = params.get('data');
-    this.authServices.postData({euid : this.myevent.euid}, "staffs_for_event").then((result) => {
-      localStorage.set
-      this.responseData = result;
-      if(this.responseData.success){
-        this.mystaffs = this.responseData.staffs;
-        this.loading.dismiss();
-      }
-    }, (err) => {
-      this.loading.dismiss();
+    this.myservices = this.myevent.items;
+    this.myservices.forEach(element => {
+      this.sanitizer.bypassSecurityTrustUrl(element.image_description);
     });
-
-
-  } 
+  }
   
   closeModal() {
     const data = {
@@ -55,34 +37,7 @@ export class ModalEventreviewPage {
   }
 
   enviar(){
-    let me = this;
-    this.loading = this.loadingCtrl.create({
-      spinner: 'show',
-      content: 'enviando...'
-    });
-    var _total = this.mystaffs.length;
-    var _cont = 0;
-
-    this.loading.present();
-    this.mystaffs.forEach(element => {
-      this.authServices.postData({rate: element.rate, uuid: element.uuid, esuid : element.esuid, description: element.description}, "product_rate").then((result) => {
-        localStorage.set
-        this.responseData = result;
-        _cont++;
-        if(_cont == _total){
-          this.authServices.postData({esuid : element.esuid}, "event_rated").then((result) => {
-            localStorage.set
-            this.responseData = result;
-            me.loading.dismiss();
-            this.view.dismiss();
-          }, (err) => {
-            me.loading.dismiss();
-          });
-        }
-      }, (err) => {
-        me.loading.dismiss();
-      });
-    });
+    this.events.publish('services:rate', this.myevent, this.view);
   }
 
   faleCom(){

@@ -5,8 +5,7 @@ import { Modal, ModalController, ModalOptions, IonicPage, Events, NavController 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 import { AngularFireAuth } from "angularfire2/auth"; 
 
-import { Account } from "../../models/account/account.interface";
-import { Event } from "../../models/event/event.interface";
+import { Account } from "../../models/account/account";
 /**
  * Generated class for the SignupPage page.
  *
@@ -19,9 +18,6 @@ import { Event } from "../../models/event/event.interface";
   templateUrl: 'signup.html',
 })
 export class SignupPage {
- 
-  account = {} as Account;
-  event = {} as Event;
 
   public frmSignup : FormGroup;
   public responseData : any;
@@ -37,7 +33,12 @@ export class SignupPage {
     iagree: false
   }
 
-  constructor(public events: Events, private formBuilder:FormBuilder, public afAuth:AngularFireAuth, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl : NavController) {
+  constructor(public events: Events, public account: Account, private formBuilder:FormBuilder, public afAuth:AngularFireAuth, public authServices: AuthServicesProvider, private modal: ModalController, public navCtrl : NavController) {
+    
+    if(this.account.uuid != ""){
+      this.navCtrl.setRoot('HomePage');
+    }
+
     this.frmSignup = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],

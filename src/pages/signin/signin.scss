@@ -1,19 +1,20 @@
 page-signin{
     color:rgb(89,97,118);
 
-    .btnFacebook{
-        background-color: #3b579c;
+    .btnFacebook, .btnFacebook:hover{
+        background-color: #3b579c!important;
         color: #fff;
-        font-size: 14pt;
+        font-size: 14px;
         font-weight: 700;
         width: 100%;
         height: 45px;
         margin: 0 auto;
     }
 
-    .btnNormal{
-        background-color:#fff;
+    .btnNormal, .btnNormal:hover{
+        background-color:#fff!important;
         color:rgb(89,97,118);
+        box-shadow: none;
     }
 
     .inputs{

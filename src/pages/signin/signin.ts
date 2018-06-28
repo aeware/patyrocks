@@ -6,8 +6,7 @@ import { AuthServicesProvider } from '../../providers/auth-services/auth-service
 // import { SocialService } from '../../providers/social-services/social-services';
 import { AngularFireAuth } from "angularfire2/auth"; 
 
-import { Account } from "../../models/account/account.interface";
-import { Event } from "../../models/event/event.interface";
+import { Account } from "../../models/account/account";
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 /**
@@ -25,15 +24,17 @@ export class SigninPage {
 
   loading: Loading;
 
-  account = {} as Account;
-  event = {} as Event;
- 
   public frmSignin : FormGroup;
   public responseData : any;
   public responseData2 : any;
   public responseData3 : any;
 
-  constructor(public events: Events, private loadingCtrl: LoadingController, private formBuilder:FormBuilder, public toast: ToastController, public afAuth:AngularFireAuth, public navCtrl: NavController, public authServices: AuthServicesProvider, public alertCtrl: AlertController) {
+  constructor(public events: Events, public account: Account, private loadingCtrl: LoadingController, private formBuilder:FormBuilder, public toast: ToastController, public afAuth:AngularFireAuth, public navCtrl: NavController, public authServices: AuthServicesProvider, public alertCtrl: AlertController) {
+    
+    if(this.account.uuid != ""){
+      this.navCtrl.setRoot('HomePage');
+    }
+    
     this.frmSignin = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, Events, NavParams } from 'ionic-angular';
  
-import { params } from "../../models/event/event.interface";
+import { Cart } from "../../models/shopping/shopping";
 // import { EmpenhoPage } from "../empenho/empenho";
 
 /**
@@ -17,13 +17,13 @@ import { params } from "../../models/event/event.interface";
 })
 export class ModalProductsPage {
 
-  public item : params;
+  public item : Cart;
 
   constructor(public events: Events, private view: ViewController, public params: NavParams) {
 
     this.item = params.get('data');
+    console.log(this.item);
     
-
   }
   
   closeModal() {

@@ -1,18 +1,21 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle float-left>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title float-left>Sobre nós</ion-title>
-    <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
-      <img src="assets/imgs/logo.png" style="height: 44px;"/>
-    </button>
-  </ion-navbar>
+  <button class="head_btn_menu" ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <div class="head_title"><img src="assets/imgs/title.png"/></div>
+  <button class="paty-btn" ion-button float-right color="light" (click)="faleCom()">
+    <img src="assets/imgs/logo.png" style="height: 44px;"/>
+  </button>
 </ion-header>
 
 <ion-content>
   <div padding>
     <ion-grid>
+        <ion-row>
+          <ion-col col-12 text-center>
+            <h4>Sobre Nós</h4>
+          </ion-col>
+        </ion-row>
         <ion-row>
           <ion-col col-12 text-center>
             <img src="assets/imgs/logo.png"/>

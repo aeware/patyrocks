@@ -1,0 +1,44 @@
+<ion-header>
+  <button ion-button (click)="closeModal()" color="light" class="head_btn_voltar"><ion-icon name="arrow-back"></ion-icon>voltar</button>
+  <div class="head_title"><img src="assets/imgs/title.png"/></div>
+  <button class="head_cart" ion-button float-right color="light" (click)="shopping_cart()">
+      <ion-icon name="cart"></ion-icon><ion-badge *ngIf="shopp.items_total > 0" item-end>{{shopp.items_total}}</ion-badge>
+  </button>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="frmCalculate" (ngSubmit)="openCheckout()">
+    <ion-grid>
+      <ion-row *ngFor="let item of event.items">
+        <ion-col col-12 class="layout_1">
+          <ion-card full [style.backgroundImage]="'url(' + item.image + ')'" >
+          </ion-card>
+          <div class="titulo" (click)="openModal(item)">{{item.name}} <ion-icon name="information-circle"></ion-icon></div>
+          <div class="less_plus">
+              <button class="btnMenos" type="button" ion-button (click)="setQtd(item.tag, 'less')"><ion-icon name="remove"></ion-icon></button>
+              <p class="qtd">{{item.qty}}</p>
+              <button class="btnMais" type="button" ion-button (click)="setQtd(item.tag, 'plus')"><ion-icon name="add"></ion-icon></button>
+            </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <div class="espaco-botao"></div>
+</ion-content>
+<div id="footer" full float-end>
+  <div class="valTotal">
+    <ion-grid>
+      <ion-row>
+          <ion-col col-6 class="borderToFooter">
+            <div class="btnTotalNew">
+                <ion-icon class="icoCart" name="cart"></ion-icon><p class="totais">Valor:<br/><span>{{subTotal | currency:"R$ ":0}}</span></p>
+            </div>
+          </ion-col>
+          <ion-col col-6 class="borderToFooter">
+              <button class="btnEventoNew" (click)="openCheckout()" type="submit" ion-button>Adicionar<br/>ao carrinho</button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div> 
+  
+</div>

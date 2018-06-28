@@ -3,7 +3,8 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { IonicPage, NavController, NavParams, LoadingController, Loading, Modal, ModalController, ModalOptions, Events } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Event, params } from "../../models/event/event.interface";
+import { Event, Item } from "../../models/event/event";
+import { Shopping } from "../../models/shopping/shopping";
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
@@ -22,26 +23,22 @@ import { AuthServicesProvider } from '../../providers/auth-services/auth-service
 export class CalculatePage {
 
   loading: Loading;
-  public account : any;
-  public frmCalculate : FormGroup;
   responseData : any;
-  event = {} as Event;
+  public show_scroll_alert:boolean;
+  public frmCalculate : FormGroup;
   public hours: any;
+  public subTotal = 0.0;
   
-  constructor(public events: Events, public sanitizer : DomSanitizer, private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController) {
+  constructor(public shopp: Shopping, public event: Event, public events: Events, public sanitizer : DomSanitizer, private loadingCtrl: LoadingController, public authServices: AuthServicesProvider, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, private modal: ModalController) {
     this.frmCalculate = this.formBuilder.group({
       duration: ['', Validators.required]
     });
+    this.show_scroll_alert = false;
 
-    this.event.valueTotal = 0;
-    this.event.duration = 0;
-
-    if(localStorage.getItem("account")){
-      this.account = JSON.parse(localStorage.getItem('account'));
-    }
+    this.event.items = [];
+    this.event.duration = 8;
 
     this.atualizaCalculos();
-
   }
 
   atualizaCalculos(){
@@ -54,34 +51,44 @@ export class CalculatePage {
     this.authServices.postData({}, "products_staffs").then((result) => {
       localStorage.set
       this.responseData = result;
-      console.log(this.responseData);
+      
       if(this.responseData.success){
-        this.event.items = [];
+        let y = 0;
         this.responseData.matrix.forEach(element => {
-          let a: params = {
-            product_id : element['product_id'],
-            name : element['name'],
-            title_pop : 'Equipe de '+element['name'],
-            tag : element['tag'],
-            image : element['image'],
-            description : element['description'],
-            vector : element,
-            qty: 0,
-            value: 0,
-            total: 0
-          };
-          //if(element['image']){
-            this.sanitizer.bypassSecurityTrustUrl(a.image);
-          //}
+          if(element['product_id']){
+            let a: Item = {
+              product_id : element['product_id'],
+              name : element['name'],
+              title_pop : 'Equipe de '+element['name'],
+              tag : element['tag'],
+              type : 'equip',
+              image : element['image'],
+              image_description : element['image_description'],
+              description : element['description'],
+              vector : element,
+              qty: 0,
+              duration: this.event.duration,
+              attendees: 0,
+              value: 0,
+              total: 0
+            };
 
-          this.event.items.push(a);          
+            this.sanitizer.bypassSecurityTrustUrl(a.image);
+
+            this.event.items.push(a);  
+            y++;
+          }       
         });
-        
-        this.event.items.forEach(item => {
-          this.frmCalculate.addControl(item.tag, new FormControl(true));
-        });
-        
-        this.loading.dismiss();
+        if(y == 0){
+          this.loading.dismiss();
+          this.events.publish('alerts:otherChannels');
+        }else{
+          this.event.items.forEach(item => {
+            this.frmCalculate.addControl(item.tag, new FormControl(true));
+          });
+          
+          this.loading.dismiss();
+        }
       }else{
         this.loading.dismiss();
       }
@@ -116,7 +123,12 @@ export class CalculatePage {
     })[0];
   }
 
+  showAlert(){
+    this.show_scroll_alert = true;
+  }
+
   setQtd(product_id, type){
+    this.closeAlert();
 
       if(product_id && type != 'duration'){
         var a = this.findValInArray(this.event.items, product_id);
@@ -134,83 +146,25 @@ export class CalculatePage {
           a.value = a.total = 0;  
       }
       
-      this.event.valueTotal = 0;
+      this.subTotal = 0;
       if(this.event.duration > 0){
       
         this.event.items.forEach(b => {
           if(b.qty > 0)
           {
-            this.event.valueTotal += (parseInt(b.vector['a'+this.event.duration]) * b.qty);
+            b.value = b.vector['a'+this.event.duration];
+            b.total = (b.vector['a'+this.event.duration] * b.qty);
+            this.subTotal += (parseInt(b.vector['a'+this.event.duration]) * b.qty);
+            b.duration = this.event.duration;
           }
         });
       }
   }
 
-  openCheckout(){
-    if(this.validaTela())
-      this.editarLocal();
+  closeAlert(){
+    this.show_scroll_alert = false;
   }
-
-  editarLocal(){
-    const myModalOptions: ModalOptions = {
-      enableBackdropDismiss: false
-    };
-
-    const myModal: Modal = this.modal.create('ModalDetailsPage', { data : this.event, attendees: true}, myModalOptions);
-      myModal.onDidDismiss(data => {
-      if(!data.return){
-        this.checkout();
-      }else{
-        this.events.publish('alerts:toast','Confirme os detalhes na tela anterior para continuar.');
-      }
-    });
-    myModal.present();
-  }
-
-  checkout(){
-
-    this.loading = this.loadingCtrl.create({
-      spinner: 'show',
-      content: 'Carregando...'
-    });
-    this.loading.present();
-
-    localStorage.setItem("empenho", JSON.stringify(this.event));
-
-
-    if(!localStorage.getItem('empenho')){ 
-      this.navCtrl.setRoot('HomePage');
-    }
-    
-    if(localStorage.getItem("account")){
-      this.account = JSON.parse(localStorage.getItem('account'));
-      this.event.uuid = this.account.uuid;
-    }
-
-    console.log(this.event);
-    this.authServices.postData(this.event, "event").then((result) => {
-      localStorage.set
-      this.responseData = result;
-
-      this.event.uid = this.responseData.event.euid;
-
-      localStorage.setItem("empenho", JSON.stringify(this.event));
-
-      this.loading.dismiss();
-
-      if(!localStorage.getItem("account")){
-        this.navCtrl.setRoot('SigninPage');  
-      }else{
-        this.navCtrl.setRoot('PaymentPage');
-      }
-      
-
-    }, (err) => {
-      this.loading.dismiss();
-      this.events.publish('alerts:toast','Houve um erro na solicitação. Tente novamente.');
-    });
-  }
-
+  
   openModal(data){
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
@@ -221,7 +175,28 @@ export class CalculatePage {
     myModal.present();
   }
 
-  faleCom(){
-    this.events.publish('alerts:contactUs');
+  closeModal() {
+    this.navCtrl.setRoot('HomePage');
   }
+  
+  shopping_cart(){
+    this.events.publish('shopping:cart');
+  }
+
+  openCheckout(){
+    if(this.validaTela()){
+      this.events.publish('shopping:add', this.filterAdd(this.event.items));
+    }
+  }
+
+  filterAdd(array){
+    var a = [];
+    array.filter(function (chain) {
+      if(chain.qty > 0 || chain.qty == true){
+        a.push(chain);
+      }
+    });
+    return a;
+  }
+
 }

@@ -12,8 +12,9 @@
       <ion-row *ngFor="let item of event.items">
         <ion-col col-12 class="layout_1">
           <ion-card full [style.backgroundImage]="'url(' + item.image + ')'" >
+            <ion-icon name="information-circle"></ion-icon>
           </ion-card>
-          <div class="titulo" (click)="openModal(item)">{{item.name}} <ion-icon name="information-circle"></ion-icon></div>
+          <div class="titulo" (click)="openModal(item)">{{item.name}}</div>
           <div class="less_plus">
               <ion-checkbox (ionChange)="setQtd(item.tag)" [formControlName]="item.tag" [(ngModel)]="item.qty"></ion-checkbox>
           </div>

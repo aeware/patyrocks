@@ -165,7 +165,7 @@ ion-header.header .head_btn_voltar{
   top: 0px;
   margin: 0px;
   padding: 0px;
-  width: 60px;
+  width: 80px;
   height: 60px;
   z-index: 6000;
   background-color:#fff;
@@ -529,11 +529,14 @@ ion-menu ion-content .scroll-content{
   align-content: center;
   align-items: center;
   padding-left: 10px;
-  max-width: calc(100% - 145px);
+  max-width: calc(100% - 162px);
 }
-.layout_1 .titulo ion-icon{
-  margin-left: 10px;
+.layout_1 ion-card ion-icon{
   font-size: 20px;
+  position: absolute;
+  top: 48px;
+  left: 45px;
+  color: #fff;
 }
 
 .layout_1 .less_plus{
@@ -541,7 +544,7 @@ ion-menu ion-content .scroll-content{
   float:right;
   height: 70px;
   z-index: 2000;
-  width: 70px;
+  width: 90px;
   height:70px;
   display: flex;
   align-content: center;
@@ -549,7 +552,7 @@ ion-menu ion-content .scroll-content{
 }
 
 .layout_1 .less_plus ion-checkbox{
-  width: 70px;
+  width: 90px;
   height:70px;
   display: flex;
   align-content: center;
@@ -558,7 +561,10 @@ ion-menu ion-content .scroll-content{
 
 .layout_1 .less_plus ion-checkbox .checkbox-icon{
   margin:0 auto;
+  border-color: #f86d68;
 }
+
+
 
 .layout_1 .btnMenos, .layout_1 .btnMais{
   float: left;
@@ -571,7 +577,7 @@ ion-menu ion-content .scroll-content{
   padding: 0px;
 }
 .layout_1 .btnMenos:hover, .layout_1 .btnMais:hover{
-  background-color:#2e9888;
+  // background-color:#2e9888;
 }
 .layout_1 .btnMenos{
   background-color:rgb(255,255,255);

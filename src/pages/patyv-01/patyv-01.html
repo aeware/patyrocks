@@ -1,0 +1,13 @@
+<ion-header>
+  <button ion-button (click)="closeModal()" color="light" class="head_btn_voltar"><ion-icon name="arrow-back"></ion-icon>voltar</button>
+  <div class="head_title"><img src="assets/imgs/title.png"/></div>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="pane_text" [innerHTML]="ai.chat"></div>
+</ion-content>
+<div class="row_ai_answer">
+  <ion-input type="text" class="ai_answer" placeholder="Me conta..." [(ngModel)]="ai.answer" full ></ion-input>
+  <button class="ai_answer_send" (click)="send()" type="button" ion-button><ion-icon name="send"></ion-icon></button>
+</div>

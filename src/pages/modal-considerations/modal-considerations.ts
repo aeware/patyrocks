@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, Events } from 'ionic-angular';
+import { IonicPage, ViewController, AlertController, Events, LoadingController, Loading } from 'ionic-angular';
+
+import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
 /**
  * Generated class for the ModalConsiderationsPage page.
@@ -15,7 +17,37 @@ import { IonicPage, ViewController, Events } from 'ionic-angular';
 })
 export class ModalConsiderationsPage {
 
-  constructor(public events: Events, private view: ViewController) {
+  loading: Loading;
+
+  public responseData: any;
+  public eventDetails: any;
+  public msg: string;
+
+  constructor(public events: Events, public authServices: AuthServicesProvider, public loadingCtrl: LoadingController, private view: ViewController, private alertCtrl: AlertController) {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'show',
+      content: 'Carregando...'
+    });
+    this.loading.present(); 
+
+    this.authServices.postData({},"message/tips").then((result) => {
+      localStorage.set
+      this.responseData = result;
+      
+      this.msg = this.responseData.msg;
+      this.loading.dismiss();
+      
+    }, (err) => {
+      this.loading.dismiss();
+      var retorno = JSON.parse(err._body);
+
+      let alert = this.alertCtrl.create({
+        title: 'Paty Rocks',
+        subTitle: retorno.status,
+        buttons: ['OK']
+      });
+      alert.present();
+    });
   }
 
   closeModal() {

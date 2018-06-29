@@ -12,32 +12,8 @@
     <div padding>
       <ion-grid>
           <ion-row>
-            <ion-col col-12 text-center>
-              <h4>Nossas Considerações para o seu evento:</h4>
-              <img src="assets/imgs/logo.png"/>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-12 text-center>
-              <p>Compre flores para seu evento.</p>
-  
-              <p>Gelo nunca é demais. Não economize no gelo.</p>
-  
-              <p>Marque o evento com bastante antecedencia.</p>
-  
-              <p>Priorize ingredientes de qualidade.</p>
-  
-              <p>Escolha bebidas de qualidade.</p>
-              
-              <p>Reveja a lista de convidados, não esqueça ninguem.</p>
-
-              <p>Planeje a sua playlist com antecedencia.</p>
-
-              <p>Se seu evento for cancelado nos avise com pelo menos 24 horas de antecedencia.</p>
-
-              <p>Quer dicas do que comprar para o seu evento? Mandei um Whatsapp para Paty +55 21 96513-5903 ou email para contato@patyrocks.com</p>
-              <h4>Beijos da Paty</h4>
-              
+            <ion-col col-12 text-center [innerHTML]="this.msg">
+        
             </ion-col>
           </ion-row>
       </ion-grid>

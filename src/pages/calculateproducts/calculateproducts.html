@@ -11,9 +11,10 @@
     <ion-grid>
       <ion-row *ngFor="let item of event.items">
         <ion-col col-12 class="layout_1">
-          <ion-card full [style.backgroundImage]="'url(' + item.image + ')'" >
+          <ion-card full [style.backgroundImage]="'url(' + item.image + ')'" (click)="openModal(item)">
+            <ion-icon name="information-circle"></ion-icon>
           </ion-card>
-          <div class="titulo" (click)="openModal(item)">{{item.name}} <ion-icon name="information-circle"></ion-icon></div>
+          <div class="titulo">{{item.name}}</div>
           <div class="less_plus">
               <button class="btnMenos" type="button" ion-button (click)="setQtd(item.tag, 'less')"><ion-icon name="remove"></ion-icon></button>
               <p class="qtd">{{item.qty}}</p>

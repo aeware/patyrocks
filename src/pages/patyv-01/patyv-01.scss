@@ -1,0 +1,7 @@
+page-patyv-01 {
+    .row_ai_answer{position: fixed;height: 40px;width: 100%;bottom: 0px;z-index: 9999;left: 0px;background-color: #fff;}
+    .ai_answer{height: 40px;width:calc(100% - 50px);float:left;border:1px solid #f76f61;}
+    .ai_answer_send{height: 40px;width:50px;float:right;margin: 0px;border:1px solid #f76f61;border-radius: 0px;}
+    .paty_ai{float: left;padding: 5px;border: 1px solid #f76f61;border-radius: 7px;}
+    .user_answer{float: right;padding: 5px;border: 1px solid #f76f61;border-radius: 7px;}
+}

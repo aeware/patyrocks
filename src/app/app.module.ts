@@ -23,6 +23,7 @@ import { SocialService } from '../providers/social-services/social-services';
 import { Shopping } from '../models/shopping/shopping';
 import { Account } from '../models/account/account';
 import { Event } from '../models/event/event';
+import { Paty_ai } from '../models/patyai/patyai';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { Event } from '../models/event/event';
     AngularFireAuth,
     Shopping,
     Account,
-    Event
+    Event,
+    Paty_ai
   ],
   schemas:[
     Ionic2RatingModule

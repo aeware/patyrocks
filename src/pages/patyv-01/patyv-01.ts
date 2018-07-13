@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 
 import { AuthServicesProvider } from '../../providers/auth-services/auth-services';
 
 import { Paty_ai } from "../../models/patyai/patyai";
+import { Account } from "../../models/account/account";
 /**
  * Generated class for the Patyv_01Page page.
  *
@@ -17,17 +19,23 @@ import { Paty_ai } from "../../models/patyai/patyai";
   templateUrl: 'patyv-01.html',
 })
 export class Patyv_01Page {
+  
   public ai = {
-    question: '',
     answer: '',
     chat: ''
   }
   responseData : any;
 
-  constructor(public pAI: Paty_ai,public navCtrl: NavController, public navParams: NavParams, public authServices: AuthServicesProvider) {
+  constructor(public pAI: Paty_ai, public account: Account, public navCtrl: NavController, public navParams: NavParams, public authServices: AuthServicesProvider) {
+    
+    this.pAI.uid = "";
+    this.pAI.user_uid = this.account.uuid;
+    this.pAI.current_question = 0;
+    this.pAI.choosed = false;   
+    
     this.paty_ai_question();
-  }
-
+  } 
+  
   thinking(){
     this.ai.chat += '<p class="paty_ai">...</p><div class="clear"></div>';
   }
@@ -43,17 +51,43 @@ export class Patyv_01Page {
   }
 
   send(){
-    console.log(this.ai.answer);
-    this.ai.chat += '<p class="user_answer">'+this.ai.answer+'</p><div class="clear"></div>';
-    this.paty_ai_question();
+    if(this.ai.answer){
+      this.ai.chat += '<p class="user_answer">'+this.ai.answer+'</p><div class="clear"></div>';
+      this.paty_ai_question();
+    }
   }
 
   paty_ai_question(){
     this.thinking();
     
-    this.authServices.postData({chat_uid: this.pAI.uid, user_uid : this.pAI.user_uid, answer: this.ai.answer}, "patyai").then((result) => {
+    this.authServices.postData({pAI: this.pAI, answer: this.ai.answer, chat: this.ai.chat}, "paty_answer").then((result) => {
       localStorage.set
       this.responseData = result;
+
+      if(this.responseData.success){
+        this.ai.answer = '';
+        this.rm_thinking();
+ 
+        this.pAI.uid = this.responseData.chat_uid;
+        this.pAI.current_question = this.responseData.question.id;
+        let _msg = '';
+        if(this.responseData.exclamation){
+          _msg = this.responseData.exclamation + '<br/><br/>';
+        }
+        _msg += this.responseData.question.question;
+        
+        if(this.responseData.possibilities){
+          _msg += '<br/><br/>' + this.responseData.possibilities;
+        }
+        
+
+        this.paty_talks(_msg);
+        if(this.responseData.callback){
+          this.paty_ai_question();
+        }
+      }else{
+        this.paty_error();
+      }
 
     }, (err) => {
       this.paty_error();

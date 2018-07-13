@@ -602,6 +602,10 @@ export class MyApp {
         this.nav.setRoot('HomePage');
     });
 
+    this.events.subscribe('page:paty', () => {
+        this.nav.setRoot('Patyv_01Page');
+    });
+
     
     this.unlogged = [
       { title: 'Home', component: 'HomePage' },

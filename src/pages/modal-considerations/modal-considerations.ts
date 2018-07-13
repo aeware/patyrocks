@@ -50,6 +50,12 @@ export class ModalConsiderationsPage {
     });
   }
 
+
+  goPaty() {
+    this.events.publish('page:paty');
+  }
+  
+
   closeModal() {
     const data = {
       // name: 'John Doe',
